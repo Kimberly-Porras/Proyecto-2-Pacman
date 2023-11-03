@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #0404e2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.mycompany.pacman.InicioController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox layoutX="343.0" layoutY="300.0" prefHeight="25.0" prefWidth="187.0" promptText="Modo de juego" />
+      <Button layoutX="414.0" layoutY="409.0" mnemonicParsing="false" text="Jugar" />
+      <Button layoutX="386.0" layoutY="350.0" mnemonicParsing="false" text="Configuraciones" />
+      <Button layoutX="808.0" layoutY="549.0" mnemonicParsing="false" text="SALIR" />
+      <TextField layoutX="249.0" layoutY="243.0" prefHeight="25.0" prefWidth="389.0" promptText="Nombre del jugador" />
+   </children>
+</AnchorPane>

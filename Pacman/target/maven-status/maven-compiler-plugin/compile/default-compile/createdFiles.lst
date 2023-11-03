@@ -1,0 +1,7 @@
+module-info.class
+com\mycompany\pacman\ConfiguracionController.class
+com\mycompany\pacman\JuegoController.class
+com\mycompany\pacman\NivelesController.class
+com\mycompany\pacman\CargaJuegoController.class
+com\mycompany\pacman\App.class
+com\mycompany\pacman\InicioController.class
