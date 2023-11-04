@@ -1,11 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
-    
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
+   <children>
+      <Label alignment="TOP_CENTER" layoutX="23.0" prefHeight="81.0" prefWidth="881.0" text="NIVELES" textFill="#ecab0f">
+         <font>
+            <Font name="Arial Black" size="52.0" />
+         </font>
+      </Label>
+      <VBox layoutX="8.0" layoutY="85.0" prefHeight="513.0" prefWidth="882.0" spacing="20.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="165.0" prefWidth="882.0" spacing="10.0">
+               <children>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#bntNIvel1" prefHeight="166.0" prefWidth="241.0" style="-fx-background-color: trasparent; -fx-border-color: #ecab0f;" text="Nivel 1" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="102.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel1.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel2" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 2" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="107.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/FONDO2.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel3" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 3" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="122.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel3.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel4" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 4" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="135.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel4.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="171.0" prefWidth="882.0" spacing="15.0">
+               <children>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel5" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 5" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="106.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo5.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel6" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 6" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="113.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/FONDO6.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel7" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 7" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="111.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel7.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel8" prefHeight="166.0" prefWidth="241.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 8" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="117.0" fitWidth="182.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/FONDO8.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="882.0" spacing="15.0">
+               <children>
+                  <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#bntNIvel9" prefHeight="142.0" prefWidth="233.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 9" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="101.0" fitWidth="237.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel9.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bntNIvel10" contentDisplay="TOP" disable="true" mnemonicParsing="false" prefHeight="135.0" prefWidth="226.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 10" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="101.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Imagenes/fondo-nivel10.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="794.0" layoutY="11.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="71.0" style="-fx-background-color: trasparent;" />
+      <ImageView fx:id="btnRegresar" fitHeight="38.0" fitWidth="40.0" layoutX="842.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/volver.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>
