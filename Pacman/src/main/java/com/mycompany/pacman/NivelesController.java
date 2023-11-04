@@ -4,6 +4,7 @@
  */
 package com.mycompany.pacman;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,32 +13,38 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
+//Universidad Nacional, Campus Coto
+//Desarrollado por:
+//Joxan Portilla Hernandez
+//Melani Barrantes Hidalgo
+//Alberto Torres
+//Kimberly Porras
+//2023
+
 public class NivelesController implements Initializable {
 
     @FXML
     private Button bntNIvel10;
     @FXML
     private ImageView btnRegresar;
+    
+    public static int Nivel = 0;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
     @FXML
-    private void bntNIvel1(ActionEvent event) {
+    private void bntNIvel1(ActionEvent event) throws IOException {
+        Nivel = 1;
+        App.setRoot("Juego");
     }
 
     @FXML
-    private void bntNIvel2(ActionEvent event) {
+    private void bntNIvel2(ActionEvent event) throws IOException {
+        Nivel = 2;
+        App.setRoot("Juego");
     }
 
     @FXML
@@ -67,5 +74,4 @@ public class NivelesController implements Initializable {
     @FXML
     private void bntNIvel9(ActionEvent event) {
     }
-    
 }

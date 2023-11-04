@@ -18,12 +18,12 @@
             <Image url="@../../../Imagenes/Titulo_Pacma.png" />
          </image>
       </ImageView>
-      <Button id="button" layoutX="250.0" layoutY="341.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-border-color: orange; -fx-border-color: black; -fx-background-radius: 15; -fx-border-width: 10;" stylesheets="@../../../CSS/EstiloPacman.css" text="JUGAR" />
       <Label layoutX="527.0" layoutY="450.0" text="Pacman 2023" textFill="#a1981c" />
       <ImageView fitHeight="480.0" fitWidth="657.0" layoutX="-16.0" layoutY="2.0" opacity="0.17" pickOnBounds="true">
          <image>
             <Image url="@../../../Imagenes/Laberinto.jpg" />
          </image>
       </ImageView>
+      <Button id="button" layoutX="250.0" layoutY="341.0" mnemonicParsing="false" onAction="#cambiarConfiguracion" prefHeight="26.0" prefWidth="139.0" style="-fx-border-color: orange; -fx-border-color: black; -fx-background-radius: 15; -fx-border-width: 10;" stylesheets="@../../../CSS/EstiloPacman.css" text="JUGAR" />
    </children>
 </AnchorPane>

@@ -8,11 +8,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
+//Universidad Nacional, Campus Coto
+//Desarrollado por:
+//Joxan Portilla Hernandez
+//Melani Barrantes Hidalgo
+//Alberto Torres
+//Kimberly Porras
+//2023
+
 public class ConfiguracionController implements Initializable {
 
     /**

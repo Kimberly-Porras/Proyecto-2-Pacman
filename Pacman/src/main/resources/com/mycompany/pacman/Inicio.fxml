@@ -9,13 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.InicioController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.InicioController">
    <children>
       <ImageView fitHeight="495.0" fitWidth="633.0" layoutX="3.0" layoutY="-8.0" opacity="0.25" pickOnBounds="true">
          <image>
             <Image url="@../../../Imagenes/Laberinto.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="170.0" fitWidth="342.0" layoutX="178.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/Titulo_Pacma.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="488.0" fitWidth="650.0" layoutX="-7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="TOP_CENTER" layoutX="178.0" layoutY="175.0" prefHeight="290.0" prefWidth="300.0" spacing="20.0">
          <children>
             <TextField fx:id="txtNombreJugador" prefHeight="26.0" prefWidth="263.0" promptText="Nombre del jugador" />
@@ -28,11 +34,5 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <ImageView fitHeight="170.0" fitWidth="342.0" layoutX="178.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Imagenes/Titulo_Pacma.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="488.0" fitWidth="650.0" layoutX="-7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

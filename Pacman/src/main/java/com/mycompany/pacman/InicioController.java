@@ -4,16 +4,29 @@
  */
 package com.mycompany.pacman;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
+//Universidad Nacional, Campus Coto
+//Desarrollado por:
+//Joxan Portilla Hernandez
+//Melani Barrantes Hidalgo
+//Alberto Torres
+//Kimberly Porras
+//2023
+
 public class InicioController implements Initializable {
+
+    @FXML
+    private TextField txtNombreJugador;
+    @FXML
+    private ComboBox<?> cbxModoJuego;
 
     /**
      * Initializes the controller class.
@@ -22,5 +35,22 @@ public class InicioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void OnModoJuego(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnIniciarPartida(ActionEvent event) throws IOException {
+        App.setRoot("Niveles");
+    }
+
+    @FXML
+    private void btnConfiguraciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnSalir(ActionEvent event) {
+    }
     
 }
