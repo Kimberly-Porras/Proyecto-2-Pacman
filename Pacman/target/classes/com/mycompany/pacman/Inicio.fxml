@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #0404e2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.mycompany.pacman.InicioController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.InicioController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" />
-      <ComboBox layoutX="343.0" layoutY="300.0" prefHeight="25.0" prefWidth="187.0" promptText="Modo de juego" />
-      <Button layoutX="414.0" layoutY="409.0" mnemonicParsing="false" text="Jugar" />
-      <Button layoutX="386.0" layoutY="350.0" mnemonicParsing="false" text="Configuraciones" />
-      <Button layoutX="808.0" layoutY="549.0" mnemonicParsing="false" text="SALIR" />
-      <TextField layoutX="249.0" layoutY="243.0" prefHeight="25.0" prefWidth="389.0" promptText="Nombre del jugador" />
+      <ImageView fitHeight="495.0" fitWidth="633.0" layoutX="3.0" layoutY="-8.0" opacity="0.25" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Imagenes/Laberinto.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="178.0" layoutY="175.0" prefHeight="290.0" prefWidth="300.0" spacing="20.0">
+         <children>
+            <TextField fx:id="txtNombreJugador" prefHeight="26.0" prefWidth="263.0" promptText="Nombre del jugador" />
+            <ComboBox fx:id="cbxModoJuego" onAction="#OnModoJuego" prefHeight="26.0" prefWidth="179.0" promptText="Modo de juego" style="-fx-background-color: white;" />
+            <Button mnemonicParsing="false" onAction="#btnIniciarPartida" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: #8fe3ff; -fx-border-color: #0CB7F2;" text="Iniciar partida" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#btnConfiguraciones" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: ecab0f;" text="Configuraciones" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#btnSalir" prefHeight="38.0" prefWidth="179.0" style="-fx-background-color: #f80000;" text="Salir del juego " textFill="WHITE" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <ImageView fitHeight="170.0" fitWidth="342.0" layoutX="178.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/Titulo_Pacma.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="488.0" fitWidth="650.0" layoutX="-7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
