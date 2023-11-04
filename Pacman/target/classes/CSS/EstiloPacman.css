@@ -1,0 +1,79 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 3 nov. 2023, 20:29:06
+    Author     : joxan
+*/
+
+/* Estilo general de la fuente */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Estilo de fondo general */
+.root {
+    -fx-background-color: black;
+}
+
+/* Estilo de etiquetas (labels) */
+.label {
+    -fx-text-fill: yellow;
+}
+
+/* Estilo de botones */
+.button {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+}
+
+/* Efecto "hover" para botones */
+.button:hover {
+    -fx-background-color: orange;
+}
+
+/* Estilo de campos de texto */
+.text-field {
+    -fx-background-color: black;
+    -fx-text-fill: yellow;
+    -fx-border-color: yellow;
+}
+
+/* Efecto "hover" para campos de texto */
+.text-field:hover {
+    -fx-background-color: darkgray;
+}
+
+/* Estilo de áreas de texto (TextAreas) */
+.text-area {
+    -fx-background-color: black;
+    -fx-text-fill: yellow;
+    -fx-border-color: yellow;
+}
+
+/* Efecto "hover" para áreas de texto */
+.text-area:hover {
+    -fx-background-color: darkgray;
+}
+
+/* Estilo de casillas de verificación (Checkboxes) */
+.check-box {
+    -fx-text-fill: yellow;
+}
+
+/* Efecto "hover" para casillas de verificación */
+.check-box:hover {
+    -fx-text-fill: orange;
+}
+
+/* Estilo de radio botones (Radio Buttons) */
+.radio-button {
+    -fx-text-fill: yellow;
+}
+
+/* Efecto "hover" para radio botones */
+.radio-button:hover {
+    -fx-text-fill: orange;
+}
