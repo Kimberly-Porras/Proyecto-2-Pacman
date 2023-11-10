@@ -7,6 +7,8 @@ package com.mycompany.pacman;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,14 +28,14 @@ public class InicioController implements Initializable {
     @FXML
     private TextField txtNombreJugador;
     @FXML
-    private ComboBox<?> cbxModoJuego;
-
+    private ComboBox<String> cbxModoJuego;
+ObservableList<String> listaTipoNivel = FXCollections.observableArrayList("Fácil", "Medio", "Difícil");
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cbxModoJuego.setItems(listaTipoNivel);
     }    
 
     @FXML
