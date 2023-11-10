@@ -1,0 +1,15 @@
+|B |B |B |B |B |B |B |B |B |B |B |B |B |B |B |
+|B |F |F |F |F |F |F |F |F |F |F |F |F |F |B |
+|B |F |F |F |F |F |S |F |F |F |F |F |F |F |B |
+|B |F |F |F |F |F |B |B |F |F |F |B |F |S |B |
+|B |F |F |F |F |F |F |F |F |F |F |B |F |F |B |
+|B |F |F |F |F |H |I |V |J |H |F |B |F |F |B |
+|B |F |F |F |F |H |V |V |V |H |F |B |D |F |B |
+|B |F |F |F |F |H |O |V |L |H |F |B |F |F |B |
+|B |F |F |F |F |H |H |H |H |H |F |B |F |F |B |
+|B |F |F |F |F |F |F |F |F |F |F |B |F |F |B |
+|B |F |F |B |B |B |B |B |B |B |B |B |F |F |B |
+|B |F |F |B |B |B |B |B |B |B |B |B |F |F |B |
+|B |F |M |F |F |F |F |F |F |F |F |F |F |F |B |
+|B |F |F |F |F |F |F |P |F |F |F |F |F |F |B |
+|B |B |B |B |B |B |B |B |B |B |B |B |B |B |B |
