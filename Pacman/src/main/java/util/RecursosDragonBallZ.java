@@ -19,16 +19,11 @@ public class RecursosDragonBallZ implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("");
-    }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("");
+        return new Image("/Imagenes/goku.png");
     }
 
     @Override
     public Image obtenerImagenBloque() {
-        return new Image("");
+        return new Image("/Imagenes/ladrilloAzul.png");
     }
 }

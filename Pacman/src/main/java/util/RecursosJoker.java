@@ -23,12 +23,7 @@ public class RecursosJoker implements RecursosVisuales{
     }
 
     @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("/Imagenes/PacmanBatman.png");
-    }
-
-    @Override
     public Image obtenerImagenBloque() {
         return new Image("/Imagenes/LadrilloVerde.png");
-    } 
+    }
 }

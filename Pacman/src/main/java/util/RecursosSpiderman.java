@@ -19,16 +19,11 @@ public class RecursosSpiderman implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("");
-    }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("");
+        return new Image("/Imagenes/spiderman.png");
     }
 
     @Override
     public Image obtenerImagenBloque() {
-        return new Image("");
+        return new Image("/Imagenes/ladrilloAzul.png");
     }
 }

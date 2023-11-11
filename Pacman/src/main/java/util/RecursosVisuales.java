@@ -19,6 +19,5 @@ import javafx.scene.image.Image;
 // Interfaz para los recursos visuales
 public interface RecursosVisuales {
     Image obtenerImagenPersonaje();
-    Image obtenerImagenEnemigo();
     Image obtenerImagenBloque();
 }

@@ -27,8 +27,6 @@ public class NivelesController implements Initializable {
     private Button bntNIvel10;
     @FXML
     private ImageView btnRegresar;
-    
-    public static int Nivel = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -37,14 +35,11 @@ public class NivelesController implements Initializable {
 
     @FXML
     private void bntNIvel1(ActionEvent event) throws IOException {
-        Nivel = 1;
-        App.setRoot("Juego");
+        App.setRoot("Nivel 1");
     }
 
     @FXML
     private void bntNIvel2(ActionEvent event) throws IOException {
-        Nivel = 2;
-        App.setRoot("Juego");
     }
 
     @FXML

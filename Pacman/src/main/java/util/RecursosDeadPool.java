@@ -14,17 +14,11 @@ public class RecursosDeadPool implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("");
-    }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("");
+        return new Image("/Imagenes/deadpool.png");
     }
 
     @Override
     public Image obtenerImagenBloque() {
-        return new Image("");
+        return new Image("/Imagenes/ladrilloRojo.png");
     }
-    
 }

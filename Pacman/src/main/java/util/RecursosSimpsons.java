@@ -4,9 +4,9 @@
  */
 package util;
 
-//Universidad Nacional, Campus Coto
-
 import javafx.scene.image.Image;
+
+//Universidad Nacional, Campus Coto
 
 //Desarrollado por:
 //Joxan Portilla Hernandez
@@ -19,14 +19,9 @@ public class RecursosSimpsons implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("/Imagenes/Homero.gif");
+        return new Image("/Imagenes/Homero.png");
     }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("/Imagenes/Bart.png");
-    }
-
+    
     @Override
     public Image obtenerImagenBloque() {
         return new Image("/Imagenes/LadrilloPapaya.png");

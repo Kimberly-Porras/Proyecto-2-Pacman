@@ -19,16 +19,11 @@ public class RecursosOnePice implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("");
+        return new Image("/Imagenes/luffy.png");
     }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("");
-    }
-
+    
     @Override
     public Image obtenerImagenBloque() {
-        return new Image("");
+        return new Image("/Imagenes/LadrilloPapaya.png");
     }
 }

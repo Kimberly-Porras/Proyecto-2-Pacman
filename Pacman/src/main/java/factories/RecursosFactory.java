@@ -4,10 +4,9 @@
  */
 package factories;
 
-//Universidad Nacional, Campus Coto
-
 import util.RecursosVisuales;
 
+//Universidad Nacional, Campus Coto
 //Desarrollado por:
 //Joxan Portilla Hernandez
 //Melani Barrantes Hidalgo

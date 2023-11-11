@@ -19,16 +19,11 @@ public class RecursosSuperman implements RecursosVisuales{
 
     @Override
     public Image obtenerImagenPersonaje() {
-        return new Image("");
+        return new Image("/Imagenes/superman.png");
     }
-
-    @Override
-    public Image obtenerImagenEnemigo() {
-        return new Image("");
-    }
-
+    
     @Override
     public Image obtenerImagenBloque() {
-        return new Image("");
+        return new Image("/Imagenes/ladrilloRojo.png");
     }
 }
