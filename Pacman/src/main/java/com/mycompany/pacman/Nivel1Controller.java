@@ -125,21 +125,16 @@ public class Nivel1Controller implements Initializable {
             List<Node> nodosAEliminar = new ArrayList<>();
             for (javafx.scene.Node node : gritpane.getChildren()) {
                 if (GridPane.getRowIndex(node) == pacmanFila && GridPane.getColumnIndex(node) == pacmanColumna) {
-                    if (node instanceof ImageView) {
+                    if (node instanceof ImageView && node != pacmanImageView) {
                         nodosAEliminar.add(node);
                     }
                 }
             }
 
-            // Elimina los nodos después de la iteración
+            // Elimina los nodos de frutas después de la iteración
             for (Node nodo : nodosAEliminar) {
-                if (nodo != pacmanImageView) {
-                    gritpane.getChildren().remove(nodo);
-                }
+                gritpane.getChildren().remove(nodo);
             }
-
-            // Actualiza el GridPane
-            descom.pintarGridPane(gritpane, patron, 1);
         }
     }
 }
