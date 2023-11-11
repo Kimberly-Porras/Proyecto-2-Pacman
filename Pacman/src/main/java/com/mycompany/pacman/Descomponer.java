@@ -42,6 +42,8 @@ public class Descomponer {
 
     int filas = 15;
     int colum = 15;
+    
+    public static Image imagenPacman = null;
 
     public String[][] descomponerNiveles(String nivel) throws FileNotFoundException, IOException {
 
@@ -71,49 +73,57 @@ public class Descomponer {
         return temp;
     }
 
-    public void pintarGridPane(GridPane gp, String[][] escena, int nivel) {
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < colum; j++) {
-                String valor = escena[i][j];
-                Image imagen = null;
-                imagen = obtenerImagen(valor, nivel);
-                ImageView imageView = new ImageView(imagen);
+   public void pintarGridPane(GridPane gp, String[][] escena, int nivel) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < colum; j++) {
+            String valor = escena[i][j];
+            Image imagen = null;
 
-                double celdaWidth = 0;
-                double celdaHeigth = 0;
+            if (valor.equals("P")) {
+                // Si el valor es "P" (Pacman), no crea la ImageView y no la agrega al GridPane
+                continue;
+            }
 
-                if (valor.equals("B")) {
-                    celdaWidth = 45;
-                    celdaHeigth = 33;
+            imagen = obtenerImagen(valor, nivel);
+            ImageView imageView = new ImageView(imagen);
+
+            double celdaWidth;
+            double celdaHeigth;
+
+            if (valor.equals("B")) {
+                celdaWidth = 45;
+                celdaHeigth = 33;
+            } else {
+                if (valor.equals("S")) {
+                    celdaWidth = 35;
+                    celdaHeigth = 20;
                 } else {
-                    if (valor.equals("S")) {
-                        celdaWidth = 35;
-                        celdaHeigth = 20;
+                    if (valor.equals("F")) {
+                        celdaWidth = 30;
+                        celdaHeigth = 21;
                     } else {
-                        if (valor.equals("F")) {
-                            celdaWidth = 30;
-                            celdaHeigth = 21;
+                        if (valor.equals("O") || valor.equalsIgnoreCase("L") || valor.equals("I") || valor.equals("J")) {
+                            celdaWidth = 35;
+                            celdaHeigth = 24;
                         } else {
-                            if (valor.equals("O") || valor.equalsIgnoreCase("L") || valor.equals("I") || valor.equals("J")) {
-                                celdaWidth = 35;
-                                celdaHeigth = 24;
-                            } else {
-                                celdaWidth = 42;
-                                celdaHeigth = 33;
-                            }
+                            celdaWidth = 42;
+                            celdaHeigth = 33;
                         }
                     }
                 }
-
-                imageView.setFitWidth(celdaWidth);
-                imageView.setFitHeight(celdaHeigth);
-
-                gp.add(imageView, j, i);
             }
+
+            imageView.setFitWidth(celdaWidth);
+            imageView.setFitHeight(celdaHeigth);
+
+            gp.add(imageView, j, i);
         }
     }
+}
 
-    private Image obtenerImagen(String valor, int nivel) {
+
+
+    public Image obtenerImagen(String valor, int nivel) {
         Image imagen = null;
 
         switch (nivel) {
@@ -253,7 +263,7 @@ public class Descomponer {
         return imagen;
     }
     
-    private Image pintarEscenario(String valor){
+    public Image pintarEscenario(String valor){
         Image imagen = null;
 
         EnemigosFactory FabricaE = new Enemigo();

@@ -1,34 +1,117 @@
 package com.mycompany.pacman;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-//Universidad Nacional, Campus Coto
-//Desarrollado por:
-//Joxan Portilla Hernandez
-//Melani Barrantes Hidalgo
-//Alberto Torres
-//Kimberly Porras
-//2023
+import javafx.scene.control.Label;
 
 public class Nivel1Controller implements Initializable {
 
     @FXML
     private GridPane gritpane;
-    public  String[][] patron = new String[15][15];
-    Descomponer descom = new Descomponer();
+    private Label lblVidas;
+    private Label lblPuntos;
+    private String[][] patron = new String[15][15];
+    private Descomponer descom = new Descomponer();
+    private ImageView pacmanImageView;  // ImageView para la imagen del personaje
+    private int pacmanFila;  // Fila actual de Pacman en la matriz
+    private int pacmanColumna;  // Columna actual de Pacman en la matriz
+    
+    public static int vidas = 6;
+    public static int puntos = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             patron = descom.descomponerNiveles("Nivel1");
             descom.pintarGridPane(gritpane, patron, 1);
+
+            // Encuentra la posición inicial del personaje 'P' en la matriz
+            int[] posicionInicial = encontrarPosicion('P', patron);
+            pacmanFila = posicionInicial[0];
+            pacmanColumna = posicionInicial[1];
+
+            // Crea un ImageView para la imagen del personaje
+            pacmanImageView = new ImageView();
+            pacmanImageView.setImage(descom.obtenerImagen("P", 1));  // Obtén la imagen del personaje
+            pacmanImageView.setFitWidth(35);  // Ajusta el ancho según sea necesario
+            pacmanImageView.setFitHeight(20);  // Ajusta la altura según sea necesario
+
+            // Agrega el ImageView al GridPane en la posición inicial
+            gritpane.add(pacmanImageView, pacmanColumna, pacmanFila);
+
+            // Configura el manejo de eventos de teclado
+            gritpane.setOnKeyPressed(this::manejarEventoTeclado);
+            gritpane.setFocusTraversable(true);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
+    private int[] encontrarPosicion(char elemento, String[][] matriz) {
+        // Encuentra las coordenadas de la primera ocurrencia del elemento en la matriz
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j].equals(String.valueOf(elemento))) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    private void manejarEventoTeclado(KeyEvent event) {
+        int filaNueva = pacmanFila;
+        int columnaNueva = pacmanColumna;
+
+        switch (event.getCode()) {
+            case UP:
+                filaNueva--;
+                break;
+            case DOWN:
+                filaNueva++;
+                break;
+            case LEFT:
+                columnaNueva--;
+                break;
+            case RIGHT:
+                columnaNueva++;
+                break;
+        }
+
+        moverPersonaje(filaNueva, columnaNueva);
+    }
+
+    private void moverPersonaje(int filaNueva, int columnaNueva) {
+        if (esMovimientoValido(filaNueva, columnaNueva)) {
+            // Elimina el personaje de la posición actual
+            gritpane.getChildren().remove(pacmanImageView);
+
+            // Añade el personaje a la nueva posición
+            gritpane.add(pacmanImageView, columnaNueva, filaNueva);
+
+            // Actualiza la posición actual de Pacman en la matriz
+            pacmanFila = filaNueva;
+            pacmanColumna = columnaNueva;
+        }
+    }
+
+    private boolean esMovimientoValido(int fila, int columna) {
+    // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
+    return fila >= 0 && fila < patron.length &&
+           columna >= 0 && columna < patron[0].length &&
+           !patron[fila][columna].equals("B") &&
+           !patron[fila][columna].equals("V");
+}
+    
+    
+    
+
 }
