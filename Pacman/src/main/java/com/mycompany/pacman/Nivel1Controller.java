@@ -8,7 +8,10 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 public class Nivel1Controller implements Initializable {
@@ -22,7 +25,7 @@ public class Nivel1Controller implements Initializable {
     private ImageView pacmanImageView;  // ImageView para la imagen del personaje
     private int pacmanFila;  // Fila actual de Pacman en la matriz
     private int pacmanColumna;  // Columna actual de Pacman en la matriz
-    
+
     public static int vidas = 6;
     public static int puntos = 0;
 
@@ -46,7 +49,6 @@ public class Nivel1Controller implements Initializable {
             // Agrega el ImageView al GridPane en la posición inicial
             gritpane.add(pacmanImageView, pacmanColumna, pacmanFila);
 
-            // Configura el manejo de eventos de teclado
             gritpane.setOnKeyPressed(this::manejarEventoTeclado);
             gritpane.setFocusTraversable(true);
 
@@ -90,7 +92,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void moverPersonaje(int filaNueva, int columnaNueva) {
-        if (esMovimientoValido(filaNueva, columnaNueva)) {
+        if (MovimientoValido(filaNueva, columnaNueva)) {
             // Elimina el personaje de la posición actual
             gritpane.getChildren().remove(pacmanImageView);
 
@@ -100,18 +102,44 @@ public class Nivel1Controller implements Initializable {
             // Actualiza la posición actual de Pacman en la matriz
             pacmanFila = filaNueva;
             pacmanColumna = columnaNueva;
+
+            // Verifica y procesa la fruta en la nueva posición
+            verificarYProcesarFruta();
         }
     }
 
-    private boolean esMovimientoValido(int fila, int columna) {
-    // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
-    return fila >= 0 && fila < patron.length &&
-           columna >= 0 && columna < patron[0].length &&
-           !patron[fila][columna].equals("B") &&
-           !patron[fila][columna].equals("V");
-}
-    
-    
-    
+    private boolean MovimientoValido(int fila, int columna) {
+        // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
+        return fila >= 0 && fila < patron.length
+                && columna >= 0 && columna < patron[0].length
+                && !patron[fila][columna].equals("B")
+                && !patron[fila][columna].equals("V");
+    }
 
+    private void verificarYProcesarFruta() {
+        if (patron[pacmanFila][pacmanColumna].equals("F")) {
+            // Elimina la fruta de la matriz
+            patron[pacmanFila][pacmanColumna] = " ";
+
+            // Busca y elimina la imagen de la fruta en la posición del Pacman
+            List<Node> nodosAEliminar = new ArrayList<>();
+            for (javafx.scene.Node node : gritpane.getChildren()) {
+                if (GridPane.getRowIndex(node) == pacmanFila && GridPane.getColumnIndex(node) == pacmanColumna) {
+                    if (node instanceof ImageView) {
+                        nodosAEliminar.add(node);
+                    }
+                }
+            }
+
+            // Elimina los nodos después de la iteración
+            for (Node nodo : nodosAEliminar) {
+                if (nodo != pacmanImageView) {
+                    gritpane.getChildren().remove(nodo);
+                }
+            }
+
+            // Actualiza el GridPane
+            descom.pintarGridPane(gritpane, patron, 1);
+        }
+    }
 }
