@@ -18,13 +18,19 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-
-
+import javafx.scene.control.TextField;
 
 public class Nivel1Controller implements Initializable {
 
     @FXML
     private GridPane gritpane;
+    @FXML
+    private Label puntos;
+    @FXML
+    private Label tiempo;
+    @FXML
+    private Label vidas;
+    private TextField txtpuntos;
     private Label lblVidas;
     private Label lblPuntos;
     private String[][] patron = new String[15][15];
@@ -35,11 +41,18 @@ public class Nivel1Controller implements Initializable {
     private int pacmanColumna;  // Columna actual de Pacman en la matriz
     private int blinkyFila;  // Fila actual de Pacman en la matriz
     private int blinkyColumna;  // Columna actual de Pacman en la matriz
-
-    public static int vidas = 6;
-    public static int puntos = 0;
-    
-     private ScheduledExecutorService scheduler;
+    private ImageView pinkyImageView;
+    private int pinkyFila;
+    private int pinkyColumna;
+    private ImageView inkyImageView;
+    private int inkyFila;
+    private int inkyColumna;
+    private ImageView clydeImageView;
+    private int clydeFila;
+    private int clydeColumna;
+    private ScheduledExecutorService scheduler;
+    public int puntos1 = 0;
+    public int vidas1 = 6;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -74,14 +87,45 @@ public class Nivel1Controller implements Initializable {
 
             // Agrega el ImageView al GridPane en la posición inicial
             gritpane.add(blinkyImageView, blinkyColumna, blinkyFila);
-            
+
+            //Fantasma Plinky 'L'
+            int[] posicionInicialPinky = encontrarPosicion('L', patron);
+            pinkyFila = posicionInicialPinky[0];
+            pinkyColumna = posicionInicialPinky[1];
+            pinkyImageView = new ImageView();
+            pinkyImageView.setImage(descom.obtenerImagen("L", 1));
+            pinkyImageView.setFitWidth(35);
+            pinkyImageView.setFitHeight(20);
+            gritpane.add(pinkyImageView, pinkyColumna, pinkyFila);
+
+            //Fantasma inky 'I'
+            int[] posicionInicialIlinky = encontrarPosicion('I', patron);
+            inkyFila = posicionInicialIlinky[0];
+            inkyColumna = posicionInicialIlinky[1];
+            inkyImageView = new ImageView();
+            inkyImageView.setImage(descom.obtenerImagen("I", 1));
+            inkyImageView.setFitWidth(35);
+            inkyImageView.setFitHeight(20);
+            gritpane.add(inkyImageView, inkyColumna, inkyFila);
+
+            //Fantasma clyde 'J'
+            int[] posicionInicialClyde = encontrarPosicion('J', patron);
+            clydeFila = posicionInicialClyde[0];
+            clydeColumna = posicionInicialClyde[1];
+            clydeImageView = new ImageView();
+            clydeImageView.setImage(descom.obtenerImagen("J", 1));
+            clydeImageView.setFitWidth(35);
+            clydeImageView.setFitHeight(20);
+            gritpane.add(clydeImageView, clydeColumna, clydeFila);
+
             gritpane.setOnKeyPressed(this::manejarEventoTeclado);
             gritpane.setFocusTraversable(true);
-            
-            
-            scheduler = Executors.newSingleThreadScheduledExecutor();
-scheduler.scheduleAtFixedRate(this::MoverFantasmasAleatorio, 0, 500, TimeUnit.MILLISECONDS);
 
+            scheduler = Executors.newSingleThreadScheduledExecutor();
+            scheduler.scheduleAtFixedRate(this::MoverFantasmasAleatorio, 0, 500, TimeUnit.MILLISECONDS);
+            scheduler.scheduleAtFixedRate(this::MoverFantasmaAlePinky, 0, 350, TimeUnit.MILLISECONDS);
+            scheduler.scheduleAtFixedRate(this::MoverFantasmaAleInky, 0, 350, TimeUnit.MILLISECONDS);
+            scheduler.scheduleAtFixedRate(this::MoverFantasmaAleClyde, 0, 150, TimeUnit.MILLISECONDS);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -138,25 +182,22 @@ scheduler.scheduleAtFixedRate(this::MoverFantasmasAleatorio, 0, 500, TimeUnit.MI
             verificarYProcesarFruta();
         }
     }
-    
- private void moverFantasma(int filaNueva, int columnaNueva) {
-    Platform.runLater(() -> {
-        if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
-            // Elimina el personaje de la posición actual
-            gritpane.getChildren().remove(blinkyImageView);
 
-            // Añade el personaje a la nueva posición
-            gritpane.add(blinkyImageView, columnaNueva, filaNueva);
+    private void moverFantasma(int filaNueva, int columnaNueva) {
+        Platform.runLater(() -> {
+            if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
+                // Elimina el personaje de la posición actual
+                gritpane.getChildren().remove(blinkyImageView);
 
-            // Actualiza la posición actual de Pacman en la matriz
-            blinkyFila = filaNueva;
-            blinkyColumna = columnaNueva;
-        }
-    });
-}
+                // Añade el personaje a la nueva posición
+                gritpane.add(blinkyImageView, columnaNueva, filaNueva);
 
-    
-    
+                // Actualiza la posición actual de Pacman en la matriz
+                blinkyFila = filaNueva;
+                blinkyColumna = columnaNueva;
+            }
+        });
+    }
 
     private boolean MovimientoValido(int fila, int columna) {
         // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
@@ -165,22 +206,57 @@ scheduler.scheduleAtFixedRate(this::MoverFantasmasAleatorio, 0, 500, TimeUnit.MI
                 && !patron[fila][columna].equals("B")
                 && !patron[fila][columna].equals("V");
     }
-    
-    
-       private boolean MovimientoValidoFantasma(int fila, int columna) {
+
+    private boolean Vidas(int fila, int columna) {
+        // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
+        if (fila >= 0 && fila < patron.length && columna >= 0 && columna < patron[0].length) {
+            String contenido = patron[fila][columna];
+
+            // Verifica si la casilla no es un bloque ('B') ni una casilla de casa fantasma ('V')
+            if (!contenido.equals("O") && !contenido.equals("L") && !contenido.equals("I") && !contenido.equals("J")) {
+                // Aquí puedes agregar más lógica según tus necesidades.
+
+                // Llama al método quitarVida() si es necesario.
+                if (contenido.equals("0") || contenido.equals("L") || contenido.equals("I") || contenido.equals("J")) {
+                    quitarVida();
+                }
+
+                return true; // El movimiento es válido
+            }
+        }
+
+        return false; // El movimiento no es válido
+    }
+
+    private void quitarVida() {
+        // Reduces el contador de vidas
+        vidas1 -= 1;
+
+        // Actualiza el TextField de vidas en la interfaz gráfica
+        // Supongamos que tienes un TextField llamado "vidas" para mostrar las vidas.
+        vidas.setText(String.valueOf(vidas1));
+
+        // Puedes agregar más lógica aquí, como reiniciar el nivel si las vidas llegan a cero, etc.
+    }
+
+    private boolean MovimientoValidoFantasma(int fila, int columna) {
         // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
         return fila >= 0 && fila < patron.length
                 && columna >= 0 && columna < patron[0].length
                 && !patron[fila][columna].equals("B");
-                
+
     }
-    
-    
 
     private void verificarYProcesarFruta() {
         if (patron[pacmanFila][pacmanColumna].equals("F")) {
             // Elimina la fruta de la matriz
             patron[pacmanFila][pacmanColumna] = " ";
+
+            // Incrementa el contador de puntos
+            puntos1 += 6; // Puedes ajustar la cantidad de puntos según desees
+
+            // Actualiza el TextField de puntos
+            puntos.setText(String.valueOf(puntos1));
 
             // Busca y elimina la imagen de la fruta en la posición del Pacman
             List<Node> nodosAEliminar = new ArrayList<>();
@@ -199,38 +275,159 @@ scheduler.scheduleAtFixedRate(this::MoverFantasmasAleatorio, 0, 500, TimeUnit.MI
         }
     }
 
-    
-    
-    
-private void MoverFantasmasAleatorio() {
-    try {
-        Random rand = new Random();
-        int numeroAleatorio = rand.nextInt(4) + 1;
+    private void MoverFantasmasAleatorio() {
+        try {
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(4) + 1;
 
-        switch (numeroAleatorio) {
-            case 1:
-                moverFantasma(blinkyFila + 1, blinkyColumna);
-                break;
-            case 2:
-                moverFantasma(blinkyFila - 1, blinkyColumna);
-                break;
-            case 3:
-                moverFantasma(blinkyFila, blinkyColumna - 1);
-                break;
-            case 4:
-                moverFantasma(blinkyFila, blinkyColumna + 1);
-                break;
-            default:
+            switch (numeroAleatorio) {
+                case 1:
+                    moverFantasma(blinkyFila + 3, blinkyColumna);
+                    break;
+                case 2:
+                    moverFantasma(blinkyFila - 3, blinkyColumna);
+                    break;
+                case 3:
+                    moverFantasma(blinkyFila, blinkyColumna - 3);
+                    break;
+                case 4:
+                    moverFantasma(blinkyFila, blinkyColumna + 3);
+                    break;
+                default:
                 // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
 
-    
-    
-      public void detenerHilo() {
+    private void MoverFantasmaAlePinky() {
+        try {
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(4) + 1;
+
+            switch (numeroAleatorio) {
+                case 1:
+                    moverFantasmaPinky(pinkyFila + 2, pinkyColumna);
+                    break;
+                case 2:
+                    moverFantasmaPinky(pinkyFila - 2, pinkyColumna);
+                    break;
+                case 3:
+                    moverFantasmaPinky(pinkyFila, pinkyColumna - 2);
+                    break;
+                case 4:
+                    moverFantasmaPinky(pinkyFila, pinkyColumna + 2);
+                    break;
+                default:
+                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void moverFantasmaPinky(int filaNueva, int columnaNueva) {
+        Platform.runLater(() -> {
+            if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
+                // Elimina el personaje de la posición actual
+                gritpane.getChildren().remove(pinkyImageView);
+
+                // Añade el personaje a la nueva posición
+                gritpane.add(pinkyImageView, columnaNueva, filaNueva);
+
+                // Actualiza la posición actual de Pacman en la matriz
+                pinkyFila = filaNueva;
+                pinkyColumna = columnaNueva;
+            }
+        });
+    }
+
+    private void moverFantasmaInky(int filaNueva, int columnaNueva) {
+        Platform.runLater(() -> {
+            if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
+                // Elimina el personaje de la posición actual
+                gritpane.getChildren().remove(inkyImageView);
+
+                // Añade el personaje a la nueva posición
+                gritpane.add(inkyImageView, columnaNueva, filaNueva);
+
+                // Actualiza la posición actual de Pacman en la matriz
+                inkyFila = filaNueva;
+                inkyColumna = columnaNueva;
+            }
+        });
+    }
+
+    private void MoverFantasmaAleInky() {
+        try {
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(4) + 1;
+
+            switch (numeroAleatorio) {
+                case 1:
+                    moverFantasmaInky(inkyFila + 4, inkyColumna);
+                    break;
+                case 2:
+                    moverFantasmaInky(inkyFila - 4, inkyColumna);
+                    break;
+                case 3:
+                    moverFantasmaInky(inkyFila, inkyColumna - 4);
+                    break;
+                case 4:
+                    moverFantasmaInky(inkyFila, inkyColumna + 4);
+                    break;
+                default:
+                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void MoverFantasmaAleClyde() {
+        try {
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(4) + 1;
+
+            switch (numeroAleatorio) {
+                case 1:
+                    moverFantasmaClyde(clydeFila + 4, clydeColumna);
+                    break;
+                case 2:
+                    moverFantasmaClyde(clydeFila - 4, clydeColumna);
+                    break;
+                case 3:
+                    moverFantasmaClyde(clydeFila, clydeColumna - 4);
+                    break;
+                case 4:
+                    moverFantasmaClyde(clydeFila, clydeColumna + 4);
+                    break;
+                default:
+                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void moverFantasmaClyde(int filaNueva, int columnaNueva) {
+        Platform.runLater(() -> {
+            if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
+                // Elimina el personaje de la posición actual
+                gritpane.getChildren().remove(clydeImageView);
+
+                // Añade el personaje a la nueva posición
+                gritpane.add(clydeImageView, columnaNueva, filaNueva);
+
+                // Actualiza la posición actual de Pacman en la matriz
+                clydeFila = filaNueva;
+                clydeColumna = columnaNueva;
+            }
+        });
+    }
+
+    public void detenerHilo() {
         scheduler.shutdown();
     }
 }
