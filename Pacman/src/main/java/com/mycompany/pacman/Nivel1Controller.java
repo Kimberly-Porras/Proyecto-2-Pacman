@@ -30,9 +30,6 @@ public class Nivel1Controller implements Initializable {
     private Label tiempo;
     @FXML
     private Label vidas;
-    private TextField txtpuntos;
-    private Label lblVidas;
-    private Label lblPuntos;
     private String[][] patron = new String[15][15];
     private Descomponer descom = new Descomponer();
     private ImageView pacmanImageView;  // ImageView para la imagen del personaje

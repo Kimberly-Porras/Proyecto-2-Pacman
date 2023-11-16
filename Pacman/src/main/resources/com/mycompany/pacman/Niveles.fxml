@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
    <children>
       <Label alignment="TOP_CENTER" layoutX="16.0" prefHeight="81.0" prefWidth="618.0" text="NIVELES" textFill="#ecab0f">
          <font>
@@ -136,7 +136,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bntNIvel10" contentDisplay="TOP" mnemonicParsing="false" prefHeight="102.0" prefWidth="137.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 10" textFill="WHITE">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#bntNIvel10" prefHeight="102.0" prefWidth="137.0" style="-fx-border-color: #ecab0f; -fx-background-color: trasparent;" text="Nivel 10" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>

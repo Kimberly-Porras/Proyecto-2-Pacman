@@ -24,8 +24,6 @@ import javafx.scene.image.ImageView;
 public class NivelesController implements Initializable {
 
     @FXML
-    private Button bntNIvel10;
-    @FXML
     private ImageView btnRegresar;
 
     @Override
@@ -40,33 +38,46 @@ public class NivelesController implements Initializable {
 
     @FXML
     private void bntNIvel2(ActionEvent event) throws IOException {
+        App.setRoot("Nivel2");
     }
 
     @FXML
-    private void bntNIvel3(ActionEvent event) {
+    private void bntNIvel3(ActionEvent event) throws IOException {
+        App.setRoot("Nivel3");
     }
 
     @FXML
-    private void bntNIvel4(ActionEvent event) {
+    private void bntNIvel4(ActionEvent event) throws IOException {
+        App.setRoot("Nivel4");
     }
 
     @FXML
-    private void bntNIvel5(ActionEvent event) {
+    private void bntNIvel5(ActionEvent event) throws IOException {
+         App.setRoot("Nivel5");
     }
 
     @FXML
-    private void bntNIvel6(ActionEvent event) {
+    private void bntNIvel6(ActionEvent event) throws IOException {
+         App.setRoot("Nivel6");
     }
 
     @FXML
-    private void bntNIvel7(ActionEvent event) {
+    private void bntNIvel7(ActionEvent event) throws IOException {
+         App.setRoot("Nivel7");
     }
 
     @FXML
-    private void bntNIvel8(ActionEvent event) {
+    private void bntNIvel8(ActionEvent event) throws IOException {
+         App.setRoot("Nivel8");
     }
 
     @FXML
-    private void bntNIvel9(ActionEvent event) {
+    private void bntNIvel9(ActionEvent event) throws IOException {
+         App.setRoot("Nivel9");
+    }
+
+    @FXML
+    private void bntNIvel10(ActionEvent event) throws IOException {
+        App.setRoot("Nivel10");
     }
 }
