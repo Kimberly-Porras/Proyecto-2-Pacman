@@ -226,7 +226,7 @@ public class Nivel1Controller implements Initializable {
             patron[pacmanFila][pacmanColumna] = " ";
 
             // Incrementa el contador de puntos
-            NivelesController.Puntos += 1; // Puedes ajustar la cantidad de puntos según desees
+            NivelesController.Puntos += 10; // Puedes ajustar la cantidad de puntos según desees
 
             // Actualiza el TextField de puntos
             puntos.setText(String.valueOf(NivelesController.Puntos));
