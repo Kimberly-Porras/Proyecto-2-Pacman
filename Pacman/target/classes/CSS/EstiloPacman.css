@@ -7,6 +7,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : joxan
 */
 
+#AnchorPane {
+    -fx-background-color: black;
+    -fx-font-family: "Britannic Bold";
+}
+
 /* Estilo general de la fuente */
 .root {
     -fx-font-family: "Arial";
@@ -20,7 +25,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 /* Estilo de etiquetas (labels) */
 .label {
-    -fx-text-fill: yellow;
+    -fx-font-size: 13pt;
+    -fx-border-radius: 15px;
+    -fx-border-color: #3AB230;
+    -fx-text-fill: white;
 }
 
 /* Estilo de botones */

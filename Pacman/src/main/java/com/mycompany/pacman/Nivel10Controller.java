@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -36,8 +37,7 @@ public class Nivel10Controller implements Initializable {
     private Label puntos;
     @FXML
     private Label tiempo;
-    @FXML
-    private Label vidas;
+
     private String[][] patron = new String[15][15];
     private Descomponer descom = new Descomponer();
     private ImageView pacmanImageView;  // ImageView para la imagen del personaje
@@ -58,6 +58,19 @@ public class Nivel10Controller implements Initializable {
     private ScheduledExecutorService scheduler;
     public int puntos1 = 0;
     public int vidas1 = 6;
+
+    @FXML
+    private ImageView img_vida6;
+    @FXML
+    private ImageView img_vida5;
+    @FXML
+    private ImageView img_vida4;
+    @FXML
+    private ImageView img_vida3;
+    @FXML
+    private ImageView img_vida2;
+    @FXML
+    private ImageView img_vida1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -129,9 +142,11 @@ public class Nivel10Controller implements Initializable {
 
             // Verifica y procesa la fruta en la nueva posición
             verificarYProcesarFruta();
+
+            verificarColisiones();
         }
     }
-    
+
     private boolean MovimientoValido(int fila, int columna) {
         // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
         return fila >= 0 && fila < patron.length
@@ -140,36 +155,35 @@ public class Nivel10Controller implements Initializable {
                 && !patron[fila][columna].equals("V");
     }
 
-    private boolean Vidas(int fila, int columna) {
-        // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
-        if (fila >= 0 && fila < patron.length && columna >= 0 && columna < patron[0].length) {
-            String contenido = patron[fila][columna];
-
-            // Verifica si la casilla no es un bloque ('B') ni una casilla de casa fantasma ('V')
-            if (!contenido.equals("O") && !contenido.equals("L") && !contenido.equals("I") && !contenido.equals("J")) {
-                // Aquí puedes agregar más lógica según tus necesidades.
-
-                // Llama al método quitarVida() si es necesario.
-                if (contenido.equals("0") || contenido.equals("L") || contenido.equals("I") || contenido.equals("J")) {
-                    quitarVida();
-                }
-
-                return true; // El movimiento es válido
-            }
-        }
-
-        return false; // El movimiento no es válido
-    }
-
     private void quitarVida() {
-        // Reduces el contador de vidas
         vidas1 -= 1;
 
-        // Actualiza el TextField de vidas en la interfaz gráfica
-        // Supongamos que tienes un TextField llamado "vidas" para mostrar las vidas.
-        vidas.setText(String.valueOf(vidas1));
-
-        // Puedes agregar más lógica aquí, como reiniciar el nivel si las vidas llegan a cero, etc.
+        switch (vidas1) {
+            case 5:
+                Image image = new Image("/Imagenes/corazonBlanco.png");
+                img_vida1.setImage(image);
+                break;
+            case 4:
+                Image image1 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida2.setImage(image1);
+                break;
+            case 3:
+                Image image2 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida3.setImage(image2);
+                break;
+            case 2:
+                Image image3 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida4.setImage(image3);
+                break;
+            case 1:
+                Image image4 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida5.setImage(image4);
+                break;
+            case 0:
+                Image image5 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida6.setImage(image5);
+                break;
+        }
     }
 
     private boolean MovimientoValidoFantasma(int fila, int columna) {
@@ -324,6 +338,8 @@ public class Nivel10Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 inkyFila = filaNueva;
                 inkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -340,6 +356,8 @@ public class Nivel10Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 blinkyFila = filaNueva;
                 blinkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -356,10 +374,12 @@ public class Nivel10Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 clydeFila = filaNueva;
                 clydeColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
-    
+
     private void moverFantasmaPinky(int filaNueva, int columnaNueva) {
         Platform.runLater(() -> {
             if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
@@ -372,6 +392,8 @@ public class Nivel10Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 pinkyFila = filaNueva;
                 pinkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -440,5 +462,19 @@ public class Nivel10Controller implements Initializable {
         clydeImageView.setFitWidth(35);
         clydeImageView.setFitHeight(20);
         gritpane.add(clydeImageView, clydeColumna, clydeFila);
+    }
+
+    private void verificarColisiones() {
+        if (hayColisionFantasma(blinkyFila, blinkyColumna)
+                || hayColisionFantasma(pinkyFila, pinkyColumna)
+                || hayColisionFantasma(inkyFila, inkyColumna)
+                || hayColisionFantasma(clydeFila, clydeColumna)) {
+            // Procesa la colisión (por ejemplo, reduce vidas)
+            quitarVida();
+        }
+    }
+
+    private boolean hayColisionFantasma(int fila, int columna) {
+        return pacmanFila == fila && pacmanColumna == columna;
     }
 }

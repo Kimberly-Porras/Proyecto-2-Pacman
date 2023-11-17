@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 
 public class Nivel1Controller implements Initializable {
 
@@ -27,8 +28,7 @@ public class Nivel1Controller implements Initializable {
     private Label puntos;
     @FXML
     private Label tiempo;
-    @FXML
-    private Label vidas;
+
     private String[][] patron = new String[15][15];
     private Descomponer descom = new Descomponer();
     private ImageView pacmanImageView;  // ImageView para la imagen del personaje
@@ -50,6 +50,19 @@ public class Nivel1Controller implements Initializable {
     public int puntos1 = 0;
     public int vidas1 = 6;
 
+    @FXML
+    private ImageView img_vida6;
+    @FXML
+    private ImageView img_vida5;
+    @FXML
+    private ImageView img_vida4;
+    @FXML
+    private ImageView img_vida3;
+    @FXML
+    private ImageView img_vida2;
+    @FXML
+    private ImageView img_vida1;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -66,8 +79,6 @@ public class Nivel1Controller implements Initializable {
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAlePinky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleInky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleClyde, 0, 1500, TimeUnit.MILLISECONDS);
-            
-            vidas.setText(String.valueOf(vidas1));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -86,25 +97,27 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void manejarEventoTeclado(KeyEvent event) {
-        int filaNueva = pacmanFila;
-        int columnaNueva = pacmanColumna;
+        if (vidas1 != 0) {
+            int filaNueva = pacmanFila;
+            int columnaNueva = pacmanColumna;
 
-        switch (event.getCode()) {
-            case UP:
-                filaNueva--;
-                break;
-            case DOWN:
-                filaNueva++;
-                break;
-            case LEFT:
-                columnaNueva--;
-                break;
-            case RIGHT:
-                columnaNueva++;
-                break;
+            switch (event.getCode()) {
+                case UP:
+                    filaNueva--;
+                    break;
+                case DOWN:
+                    filaNueva++;
+                    break;
+                case LEFT:
+                    columnaNueva--;
+                    break;
+                case RIGHT:
+                    columnaNueva++;
+                    break;
+            }
+
+            moverPersonaje(filaNueva, columnaNueva);
         }
-
-        moverPersonaje(filaNueva, columnaNueva);
     }
 
     private void moverPersonaje(int filaNueva, int columnaNueva) {
@@ -114,14 +127,15 @@ public class Nivel1Controller implements Initializable {
 
             // Añade el personaje a la nueva posición
             gritpane.add(pacmanImageView, columnaNueva, filaNueva);
-            
+
             // Actualiza la posición actual de Pacman en la matriz
             pacmanFila = filaNueva;
             pacmanColumna = columnaNueva;
 
             // Verifica y procesa la fruta en la nueva posición
             verificarYProcesarFruta();
-            System.out.println("VIDA: " + Vidas(filaNueva, columnaNueva));
+
+            verificarColisiones();
         }
     }
 
@@ -133,41 +147,35 @@ public class Nivel1Controller implements Initializable {
                 && !patron[fila][columna].equals("V");
     }
 
-    private boolean Vidas(int fila, int columna) {
-        String contenido = patron[fila][columna];
-        
-        for(int i = 0; i < 15; i++){
-            for(int j = 0; j < 15; j++){
-                System.out.print("|" + patron[i][j] + " ");
-            }
-            System.out.println(" ");
-        }
-        
-        if (contenido.equals("O") || contenido.equals("L") || contenido.equals("I") || contenido.equals("J")) {
-            quitarVida();
-            return true;
-        }
-
-        // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
-        /*if (fila >= 0 && fila < patron.length && columna >= 0 && columna < patron[0].length) {
-            String contenido = patron[fila][columna];
-
-            // Verifica si la casilla no es un bloque ('B') ni una casilla de casa fantasma ('V')
-            if (!contenido.equals("O") && !contenido.equals("L") && !contenido.equals("I") && !contenido.equals("J")) {
-                if (contenido.equals("O") || contenido.equals("L") || contenido.equals("I") || contenido.equals("J")) {
-                    quitarVida();
-                    return true;
-                }
-            }
-        }*/
-        return false;
-    }
-
     private void quitarVida() {
-        vidas1 -= 10;
+        vidas1 -= 1;
 
-        // Actualiza el TextField de vidas en la interfaz gráfica
-        vidas.setText(String.valueOf(vidas1));
+        switch (vidas1) {
+            case 5:
+                Image image = new Image("/Imagenes/corazonBlanco.png");
+                img_vida1.setImage(image);
+                break;
+            case 4:
+                Image image1 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida2.setImage(image1);
+                break;
+            case 3:
+                Image image2 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida3.setImage(image2);
+                break;
+            case 2:
+                Image image3 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida4.setImage(image3);
+                break;
+            case 1:
+                Image image4 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida5.setImage(image4);
+                break;
+            case 0:
+                Image image5 = new Image("/Imagenes/corazonBlanco.png");
+                img_vida6.setImage(image5);
+                break;
+        }
     }
 
     private boolean MovimientoValidoFantasma(int fila, int columna) {
@@ -175,7 +183,6 @@ public class Nivel1Controller implements Initializable {
         return fila >= 0 && fila < patron.length
                 && columna >= 0 && columna < patron[0].length
                 && !patron[fila][columna].equals("B");
-
     }
 
     private void verificarYProcesarFruta() {
@@ -207,106 +214,114 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmasAleatorio() { //BLINKY
-        try {
-            Random rand = new Random();
-            int numeroAleatorio = rand.nextInt(4) + 1;
+        if (vidas1 != 0) {
+            try {
+                Random rand = new Random();
+                int numeroAleatorio = rand.nextInt(4) + 1;
 
-            switch (numeroAleatorio) {
-                case 1:
-                    moverFantasma(blinkyFila + 3, blinkyColumna);
-                    break;
-                case 2:
-                    moverFantasma(blinkyFila - 3, blinkyColumna);
-                    break;
-                case 3:
-                    moverFantasma(blinkyFila, blinkyColumna - 3);
-                    break;
-                case 4:
-                    moverFantasma(blinkyFila, blinkyColumna + 3);
-                    break;
-                default:
-                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                switch (numeroAleatorio) {
+                    case 1:
+                        moverFantasma(blinkyFila + 3, blinkyColumna);
+                        break;
+                    case 2:
+                        moverFantasma(blinkyFila - 3, blinkyColumna);
+                        break;
+                    case 3:
+                        moverFantasma(blinkyFila, blinkyColumna - 3);
+                        break;
+                    case 4:
+                        moverFantasma(blinkyFila, blinkyColumna + 3);
+                        break;
+                    default:
+                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     private void MoverFantasmaAlePinky() {
-        try {
-            Random rand = new Random();
-            int numeroAleatorio = rand.nextInt(4) + 1;
+        if (vidas1 != 0) {
+            try {
+                Random rand = new Random();
+                int numeroAleatorio = rand.nextInt(4) + 1;
 
-            switch (numeroAleatorio) {
-                case 1:
-                    moverFantasmaPinky(pinkyFila + 2, pinkyColumna);
-                    break;
-                case 2:
-                    moverFantasmaPinky(pinkyFila - 2, pinkyColumna);
-                    break;
-                case 3:
-                    moverFantasmaPinky(pinkyFila, pinkyColumna - 2);
-                    break;
-                case 4:
-                    moverFantasmaPinky(pinkyFila, pinkyColumna + 2);
-                    break;
-                default:
-                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                switch (numeroAleatorio) {
+                    case 1:
+                        moverFantasmaPinky(pinkyFila + 2, pinkyColumna);
+                        break;
+                    case 2:
+                        moverFantasmaPinky(pinkyFila - 2, pinkyColumna);
+                        break;
+                    case 3:
+                        moverFantasmaPinky(pinkyFila, pinkyColumna - 2);
+                        break;
+                    case 4:
+                        moverFantasmaPinky(pinkyFila, pinkyColumna + 2);
+                        break;
+                    default:
+                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     private void MoverFantasmaAleInky() {
-        try {
-            Random rand = new Random();
-            int numeroAleatorio = rand.nextInt(4) + 1;
+        if (vidas1 != 0) {
+            try {
+                Random rand = new Random();
+                int numeroAleatorio = rand.nextInt(4) + 1;
 
-            switch (numeroAleatorio) {
-                case 1:
-                    moverFantasmaInky(inkyFila + 4, inkyColumna);
-                    break;
-                case 2:
-                    moverFantasmaInky(inkyFila - 4, inkyColumna);
-                    break;
-                case 3:
-                    moverFantasmaInky(inkyFila, inkyColumna - 4);
-                    break;
-                case 4:
-                    moverFantasmaInky(inkyFila, inkyColumna + 4);
-                    break;
-                default:
-                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                switch (numeroAleatorio) {
+                    case 1:
+                        moverFantasmaInky(inkyFila + 4, inkyColumna);
+                        break;
+                    case 2:
+                        moverFantasmaInky(inkyFila - 4, inkyColumna);
+                        break;
+                    case 3:
+                        moverFantasmaInky(inkyFila, inkyColumna - 4);
+                        break;
+                    case 4:
+                        moverFantasmaInky(inkyFila, inkyColumna + 4);
+                        break;
+                    default:
+                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     private void MoverFantasmaAleClyde() {
-        try {
-            Random rand = new Random();
-            int numeroAleatorio = rand.nextInt(4) + 1;
+        if (vidas1 != 0) {
+            try {
+                Random rand = new Random();
+                int numeroAleatorio = rand.nextInt(4) + 1;
 
-            switch (numeroAleatorio) {
-                case 1:
-                    moverFantasmaClyde(clydeFila + 4, clydeColumna);
-                    break;
-                case 2:
-                    moverFantasmaClyde(clydeFila - 4, clydeColumna);
-                    break;
-                case 3:
-                    moverFantasmaClyde(clydeFila, clydeColumna - 4);
-                    break;
-                case 4:
-                    moverFantasmaClyde(clydeFila, clydeColumna + 4);
-                    break;
-                default:
-                // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                switch (numeroAleatorio) {
+                    case 1:
+                        moverFantasmaClyde(clydeFila + 4, clydeColumna);
+                        break;
+                    case 2:
+                        moverFantasmaClyde(clydeFila - 4, clydeColumna);
+                        break;
+                    case 3:
+                        moverFantasmaClyde(clydeFila, clydeColumna - 4);
+                        break;
+                    case 4:
+                        moverFantasmaClyde(clydeFila, clydeColumna + 4);
+                        break;
+                    default:
+                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -322,6 +337,8 @@ public class Nivel1Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 inkyFila = filaNueva;
                 inkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -338,6 +355,8 @@ public class Nivel1Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 blinkyFila = filaNueva;
                 blinkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -354,6 +373,8 @@ public class Nivel1Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 clydeFila = filaNueva;
                 clydeColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -370,6 +391,8 @@ public class Nivel1Controller implements Initializable {
                 // Actualiza la posición actual de Pacman en la matriz
                 pinkyFila = filaNueva;
                 pinkyColumna = columnaNueva;
+
+                verificarColisiones();
             }
         });
     }
@@ -438,5 +461,19 @@ public class Nivel1Controller implements Initializable {
         clydeImageView.setFitWidth(35);
         clydeImageView.setFitHeight(20);
         gritpane.add(clydeImageView, clydeColumna, clydeFila);
+    }
+
+    private void verificarColisiones() {
+        if (hayColisionFantasma(blinkyFila, blinkyColumna)
+                || hayColisionFantasma(pinkyFila, pinkyColumna)
+                || hayColisionFantasma(inkyFila, inkyColumna)
+                || hayColisionFantasma(clydeFila, clydeColumna)) {
+            // Procesa la colisión (por ejemplo, reduce vidas)
+            quitarVida();
+        }
+    }
+
+    private boolean hayColisionFantasma(int fila, int columna) {
+        return pacmanFila == fila && pacmanColumna == columna;
     }
 }
