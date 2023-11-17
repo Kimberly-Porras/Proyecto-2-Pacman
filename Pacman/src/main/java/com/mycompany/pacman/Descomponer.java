@@ -79,7 +79,7 @@ public class Descomponer {
                 String valor = escena[i][j];
                 Image imagen = null;
 
-                if (valor.equals("P")) {
+                if (valor.equals("P") || valor.equals("O") || valor.equalsIgnoreCase("L") || valor.equals("I") || valor.equals("J")) {
                     // Si el valor es "P" (Pacman), no crea la ImageView y no la agrega al GridPane
                     continue;
                 }
@@ -102,13 +102,8 @@ public class Descomponer {
                             celdaWidth = 30;
                             celdaHeigth = 21;
                         } else {
-                            if (valor.equals("O") || valor.equalsIgnoreCase("L") || valor.equals("I") || valor.equals("J")) {
-                                celdaWidth = 35;
-                                celdaHeigth = 24;
-                            } else {
-                                celdaWidth = 42;
-                                celdaHeigth = 33;
-                            }
+                            celdaWidth = 42;
+                            celdaHeigth = 33;
                         }
                     }
                 }

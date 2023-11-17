@@ -64,64 +64,10 @@ public class Nivel5Controller implements Initializable {
         try {
             patron = descom.descomponerNiveles("Nivel5");
             descom.pintarGridPane(gritpane, patron, 5);
-
-            // Encuentra la posición inicial del personaje 'P' en la matriz
-            int[] posicionInicial = encontrarPosicion('P', patron);
-            pacmanFila = posicionInicial[0];
-            pacmanColumna = posicionInicial[1];
-
-            // Crea un ImageView para la imagen del personaje
-            pacmanImageView = new ImageView();
-            pacmanImageView.setImage(descom.obtenerImagen("P", 1));  // Obtén la imagen del personaje
-            pacmanImageView.setFitWidth(35);  // Ajusta el ancho según sea necesario
-            pacmanImageView.setFitHeight(20);  // Ajusta la altura según sea necesario
-
-            // Agrega el ImageView al GridPane en la posición inicial
-            gritpane.add(pacmanImageView, pacmanColumna, pacmanFila);
-
-            // Encuentra la posición inicial del fantasma 'O' en la matriz
-            int[] posicionInicialBlinky = encontrarPosicion('O', patron);
-            blinkyFila = posicionInicialBlinky[0];
-            blinkyColumna = posicionInicialBlinky[1];
-
-            // Crea un ImageView para la imagen del fantasma
-            blinkyImageView = new ImageView();
-            blinkyImageView.setImage(descom.obtenerImagen("O", 1));  // Obtén la imagen del personaje
-            blinkyImageView.setFitWidth(35);  // Ajusta el ancho según sea necesario
-            blinkyImageView.setFitHeight(20);  // Ajusta la altura según sea necesario
-
-            // Agrega el ImageView al GridPane en la posición inicial
-            gritpane.add(blinkyImageView, blinkyColumna, blinkyFila);
-
-            //Fantasma Plinky 'L'
-            int[] posicionInicialPinky = encontrarPosicion('L', patron);
-            pinkyFila = posicionInicialPinky[0];
-            pinkyColumna = posicionInicialPinky[1];
-            pinkyImageView = new ImageView();
-            pinkyImageView.setImage(descom.obtenerImagen("L", 1));
-            pinkyImageView.setFitWidth(35);
-            pinkyImageView.setFitHeight(20);
-            gritpane.add(pinkyImageView, pinkyColumna, pinkyFila);
-
-            //Fantasma inky 'I'
-            int[] posicionInicialIlinky = encontrarPosicion('I', patron);
-            inkyFila = posicionInicialIlinky[0];
-            inkyColumna = posicionInicialIlinky[1];
-            inkyImageView = new ImageView();
-            inkyImageView.setImage(descom.obtenerImagen("I", 1));
-            inkyImageView.setFitWidth(35);
-            inkyImageView.setFitHeight(20);
-            gritpane.add(inkyImageView, inkyColumna, inkyFila);
-
-            //Fantasma clyde 'J'
-            int[] posicionInicialClyde = encontrarPosicion('J', patron);
-            clydeFila = posicionInicialClyde[0];
-            clydeColumna = posicionInicialClyde[1];
-            clydeImageView = new ImageView();
-            clydeImageView.setImage(descom.obtenerImagen("J", 1));
-            clydeImageView.setFitWidth(35);
-            clydeImageView.setFitHeight(20);
-            gritpane.add(clydeImageView, clydeColumna, clydeFila);
+            
+            cargarPersonajes();
+            
+            busquedaFantasma();
 
             gritpane.setOnKeyPressed(this::manejarEventoTeclado);
             gritpane.setFocusTraversable(true);
@@ -436,4 +382,66 @@ public class Nivel5Controller implements Initializable {
         scheduler.shutdown();
     }
     
+    private void cargarPersonajes() {
+        // Crea un ImageView para la imagen del personaje
+        pacmanImageView = new ImageView();
+        pacmanImageView.setImage(descom.obtenerImagen("P", 5));  // Obtén la imagen del personaje
+        pacmanImageView.setFitWidth(35);  // Ajusta el ancho según sea necesario
+        pacmanImageView.setFitHeight(20);  // Ajusta la altura según sea necesario
+        // Agrega el ImageView al GridPane en la posición inicial
+        gritpane.add(pacmanImageView, pacmanColumna, pacmanFila);
+
+        // Crea un ImageView para la imagen del fantasma
+        blinkyImageView = new ImageView();
+        blinkyImageView.setImage(descom.obtenerImagen("O", 5));  // Obtén la imagen del personaje
+        blinkyImageView.setFitWidth(35);  // Ajusta el ancho según sea necesario
+        blinkyImageView.setFitHeight(20);  // Ajusta la altura según sea necesario
+        // Agrega el ImageView al GridPane en la posición inicial
+        gritpane.add(blinkyImageView, blinkyColumna, blinkyFila);
+
+        pinkyImageView = new ImageView();
+        pinkyImageView.setImage(descom.obtenerImagen("L", 5));
+        pinkyImageView.setFitWidth(35);
+        pinkyImageView.setFitHeight(20);
+        gritpane.add(pinkyImageView, pinkyColumna, pinkyFila);
+
+        clydeImageView = new ImageView();
+        clydeImageView.setImage(descom.obtenerImagen("J", 5));
+        clydeImageView.setFitWidth(35);
+        clydeImageView.setFitHeight(20);
+        gritpane.add(clydeImageView, clydeColumna, clydeFila);
+
+        inkyImageView = new ImageView();
+        inkyImageView.setImage(descom.obtenerImagen("I", 5));
+        inkyImageView.setFitWidth(35);
+        inkyImageView.setFitHeight(20);
+        gritpane.add(inkyImageView, inkyColumna, inkyFila);
+    }
+    
+    private void busquedaFantasma() {
+        // Encuentra la posición inicial del personaje 'P' en la matriz
+        int[] posicionInicial = encontrarPosicion('P', patron);
+        pacmanFila = posicionInicial[0];
+        pacmanColumna = posicionInicial[1];
+
+        // Encuentra la posición inicial del fantasma 'O' en la matriz
+        int[] posicionInicialBlinky = encontrarPosicion('O', patron);
+        blinkyFila = posicionInicialBlinky[0];
+        blinkyColumna = posicionInicialBlinky[1];
+
+        //Fantasma Plinky 'L'
+        int[] posicionInicialPinky = encontrarPosicion('L', patron);
+        pinkyFila = posicionInicialPinky[0];
+        pinkyColumna = posicionInicialPinky[1];
+
+        //Fantasma inky 'I'
+        int[] posicionInicialIlinky = encontrarPosicion('I', patron);
+        inkyFila = posicionInicialIlinky[0];
+        inkyColumna = posicionInicialIlinky[1];
+
+        //Fantasma clyde 'J'
+        int[] posicionInicialClyde = encontrarPosicion('J', patron);
+        clydeFila = posicionInicialClyde[0];
+        clydeColumna = posicionInicialClyde[1];
+    }
 }
