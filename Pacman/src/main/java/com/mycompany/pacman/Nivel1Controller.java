@@ -126,11 +126,12 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void manejarEventoTeclado(KeyEvent event) {
+        boolean estaTiempoAgotado = false;
         if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
             modoTiempo.detenerTiempo();
-            NivelesController.Vidas = 0;
+            estaTiempoAgotado = true;
         } else {
-            if (NivelesController.Vidas != 0) {
+            if (NivelesController.Vidas != 0 && !estaTiempoAgotado) {
                 int filaNueva = pacmanFila;
                 int columnaNueva = pacmanColumna;
 
@@ -248,11 +249,12 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmasAleatorio() {
+        boolean estaTiempoAgotado = false;
         if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
             modoTiempo.detenerTiempo();
-            NivelesController.Vidas = 0;
+            estaTiempoAgotado = true;
         } else {
-            if (NivelesController.Vidas != 0) {
+            if (NivelesController.Vidas != 0 && !estaTiempoAgotado) {
                 try {
                     Random rand = new Random();
                     int numeroAleatorio = rand.nextInt(4) + 1;
@@ -281,11 +283,12 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAlePinky() {
+        boolean estaTiempoAgotado = false;
         if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
             modoTiempo.detenerTiempo();
-            NivelesController.Vidas = 0;
+            estaTiempoAgotado = true;
         } else {
-            if (NivelesController.Vidas != 0) {
+            if (NivelesController.Vidas != 0 && !estaTiempoAgotado) {
                 try {
                     Random rand = new Random();
                     int numeroAleatorio = rand.nextInt(4) + 1;
@@ -314,11 +317,12 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAleInky() {
+        boolean estaTiempoAgotado = false;
         if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
             modoTiempo.detenerTiempo();
-            NivelesController.Vidas = 0;
+            estaTiempoAgotado = true;
         } else {
-            if (NivelesController.Vidas != 0) {
+            if (NivelesController.Vidas != 0 && !estaTiempoAgotado) {
                 try {
                     Random rand = new Random();
                     int numeroAleatorio = rand.nextInt(4) + 1;
@@ -347,11 +351,12 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAleClyde() {
+        boolean estaTiempoAgotado = false;
         if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
             modoTiempo.detenerTiempo();
-            NivelesController.Vidas = 0;
+            estaTiempoAgotado = true;
         } else {
-            if (NivelesController.Vidas != 0) {
+            if (NivelesController.Vidas != 0 && !estaTiempoAgotado) {
                 try {
                     Random rand = new Random();
                     int numeroAleatorio = rand.nextInt(4) + 1;
