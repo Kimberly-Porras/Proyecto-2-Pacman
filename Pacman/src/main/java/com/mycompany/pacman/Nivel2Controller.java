@@ -17,11 +17,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -56,8 +58,7 @@ public class Nivel2Controller implements Initializable {
     private int clydeFila;
     private int clydeColumna;
     private ScheduledExecutorService scheduler;
-    public int puntos1 = 0;
-    public int vidas1 = 6;
+   
 
     @FXML
     private ImageView img_vida6;
@@ -71,6 +72,8 @@ public class Nivel2Controller implements Initializable {
     private ImageView img_vida2;
     @FXML
     private ImageView img_vida1;
+    @FXML
+    private Button btnBack;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,9 +159,9 @@ public class Nivel2Controller implements Initializable {
     }
 
     private void quitarVida() {
-        vidas1 -= 1;
+        NivelesController.Vidas -= 1;
 
-        switch (vidas1) {
+        switch (NivelesController.Vidas) {
             case 5:
                 Image image = new Image("/Imagenes/corazonBlanco.png");
                 img_vida1.setImage(image);
@@ -200,10 +203,10 @@ public class Nivel2Controller implements Initializable {
             patron[pacmanFila][pacmanColumna] = " ";
 
             // Incrementa el contador de puntos
-            puntos1 += 2; // Puedes ajustar la cantidad de puntos según desees
+            NivelesController.Puntos += 2; // Puedes ajustar la cantidad de puntos según desees
 
             // Actualiza el TextField de puntos
-            puntos.setText(String.valueOf(puntos1));
+            puntos.setText(String.valueOf(NivelesController.Puntos));
 
             // Busca y elimina la imagen de la fruta en la posición del Pacman
             List<Node> nodosAEliminar = new ArrayList<>();
@@ -476,5 +479,11 @@ public class Nivel2Controller implements Initializable {
 
     private boolean hayColisionFantasma(int fila, int columna) {
         return pacmanFila == fila && pacmanColumna == columna;
+    }
+    
+      @FXML
+    private void Back(MouseEvent event) throws IOException {
+        
+        App.setRoot("Niveles");
     }
 }

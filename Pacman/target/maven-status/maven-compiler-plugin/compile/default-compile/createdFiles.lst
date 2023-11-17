@@ -38,7 +38,6 @@ com\mycompany\pacman\Nivel2Controller.class
 factories\Enemigo.class
 util\RecursosDeadPool.class
 com\mycompany\pacman\Nivel7Controller$1.class
-com\mycompany\pacman\NivelesController.class
 util\RecursosVisuales.class
 com\mycompany\pacman\Nivel8Controller$1.class
 com\mycompany\pacman\ConfiguracionController.class

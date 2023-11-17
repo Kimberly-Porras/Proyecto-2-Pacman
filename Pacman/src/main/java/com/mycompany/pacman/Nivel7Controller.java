@@ -17,10 +17,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -36,7 +38,6 @@ public class Nivel7Controller implements Initializable {
     private Label puntos;
     @FXML
     private Label tiempo;
-    @FXML
     private Label vidas;
     private String[][] patron = new String[15][15];
     private Descomponer descom = new Descomponer();
@@ -56,8 +57,21 @@ public class Nivel7Controller implements Initializable {
     private int clydeFila;
     private int clydeColumna;
     private ScheduledExecutorService scheduler;
-    public int puntos1 = 0;
-    public int vidas1 = 6;
+    
+    @FXML
+    private ImageView img_vida6;
+    @FXML
+    private ImageView img_vida5;
+    @FXML
+    private ImageView img_vida4;
+    @FXML
+    private ImageView img_vida3;
+    @FXML
+    private ImageView img_vida2;
+    @FXML
+    private ImageView img_vida1;
+    @FXML
+    private Button btnBack;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -163,11 +177,11 @@ public class Nivel7Controller implements Initializable {
 
     private void quitarVida() {
         // Reduces el contador de vidas
-        vidas1 -= 1;
+        NivelesController.Vidas -= 1;
 
         // Actualiza el TextField de vidas en la interfaz gráfica
         // Supongamos que tienes un TextField llamado "vidas" para mostrar las vidas.
-        vidas.setText(String.valueOf(vidas1));
+        vidas.setText(String.valueOf(NivelesController.Vidas));
 
         // Puedes agregar más lógica aquí, como reiniciar el nivel si las vidas llegan a cero, etc.
     }
@@ -186,10 +200,10 @@ public class Nivel7Controller implements Initializable {
             patron[pacmanFila][pacmanColumna] = " ";
 
             // Incrementa el contador de puntos
-            puntos1 += 6; // Puedes ajustar la cantidad de puntos según desees
+            NivelesController.Puntos += 6; // Puedes ajustar la cantidad de puntos según desees
 
             // Actualiza el TextField de puntos
-            puntos.setText(String.valueOf(puntos1));
+            puntos.setText(String.valueOf(NivelesController.Puntos));
 
             // Busca y elimina la imagen de la fruta en la posición del Pacman
             List<Node> nodosAEliminar = new ArrayList<>();
@@ -440,5 +454,11 @@ public class Nivel7Controller implements Initializable {
         clydeImageView.setFitWidth(35);
         clydeImageView.setFitHeight(20);
         gritpane.add(clydeImageView, clydeColumna, clydeFila);
+    }
+
+      @FXML
+    private void Back(MouseEvent event) throws IOException {
+        
+        App.setRoot("Niveles");
     }
 }

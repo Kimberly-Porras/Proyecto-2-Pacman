@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.NivelesController">
    <children>
       <Label alignment="TOP_CENTER" layoutX="16.0" prefHeight="81.0" prefWidth="618.0" text="NIVELES" textFill="#ecab0f">
          <font>
@@ -153,10 +153,11 @@
          </children>
       </VBox>
       <Button layoutX="794.0" layoutY="11.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="71.0" style="-fx-background-color: trasparent;" />
-      <ImageView fx:id="btnRegresar" fitHeight="38.0" fitWidth="40.0" layoutX="588.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnRegresar" fitHeight="38.0" fitWidth="40.0" layoutX="588.0" layoutY="14.0" onMouseClicked="#Back" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Imagenes/volver.png" />
          </image>
       </ImageView>
+      <Label fx:id="lblPuntos" layoutX="38.0" layoutY="25.0" prefHeight="18.0" prefWidth="86.0" textFill="#efe6e6" />
    </children>
 </AnchorPane>

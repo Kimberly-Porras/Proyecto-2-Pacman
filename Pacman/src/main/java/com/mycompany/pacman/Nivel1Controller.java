@@ -17,8 +17,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 public class Nivel1Controller implements Initializable {
 
@@ -47,8 +49,7 @@ public class Nivel1Controller implements Initializable {
     private int clydeFila;
     private int clydeColumna;
     private ScheduledExecutorService scheduler;
-    public int puntos1 = 0;
-    public int vidas1 = 6;
+   
 
     @FXML
     private ImageView img_vida6;
@@ -62,6 +63,8 @@ public class Nivel1Controller implements Initializable {
     private ImageView img_vida2;
     @FXML
     private ImageView img_vida1;
+    @FXML
+    private Button btnBack;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,7 +100,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void manejarEventoTeclado(KeyEvent event) {
-        if (vidas1 != 0) {
+        if (NivelesController.Vidas != 0) {
             int filaNueva = pacmanFila;
             int columnaNueva = pacmanColumna;
 
@@ -148,9 +151,9 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void quitarVida() {
-        vidas1 -= 1;
+        NivelesController.Vidas  -= 1;
 
-        switch (vidas1) {
+        switch (NivelesController.Vidas) {
             case 5:
                 Image image = new Image("/Imagenes/corazonBlanco.png");
                 img_vida1.setImage(image);
@@ -191,10 +194,10 @@ public class Nivel1Controller implements Initializable {
             patron[pacmanFila][pacmanColumna] = " ";
 
             // Incrementa el contador de puntos
-            puntos1 += 1; // Puedes ajustar la cantidad de puntos según desees
+            NivelesController.Puntos += 1; // Puedes ajustar la cantidad de puntos según desees
 
             // Actualiza el TextField de puntos
-            puntos.setText(String.valueOf(puntos1));
+            puntos.setText(String.valueOf(NivelesController.Puntos));
 
             // Busca y elimina la imagen de la fruta en la posición del Pacman
             List<Node> nodosAEliminar = new ArrayList<>();
@@ -214,7 +217,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmasAleatorio() { //BLINKY
-        if (vidas1 != 0) {
+        if (NivelesController.Vidas!= 0) {
             try {
                 Random rand = new Random();
                 int numeroAleatorio = rand.nextInt(4) + 1;
@@ -242,7 +245,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAlePinky() {
-        if (vidas1 != 0) {
+        if (NivelesController.Vidas != 0) {
             try {
                 Random rand = new Random();
                 int numeroAleatorio = rand.nextInt(4) + 1;
@@ -270,7 +273,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAleInky() {
-        if (vidas1 != 0) {
+        if (NivelesController.Vidas != 0) {
             try {
                 Random rand = new Random();
                 int numeroAleatorio = rand.nextInt(4) + 1;
@@ -298,7 +301,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void MoverFantasmaAleClyde() {
-        if (vidas1 != 0) {
+        if (NivelesController.Vidas != 0) {
             try {
                 Random rand = new Random();
                 int numeroAleatorio = rand.nextInt(4) + 1;
@@ -475,5 +478,11 @@ public class Nivel1Controller implements Initializable {
 
     private boolean hayColisionFantasma(int fila, int columna) {
         return pacmanFila == fila && pacmanColumna == columna;
+    }
+
+    @FXML
+    private void Back(MouseEvent event) throws IOException {
+        
+        App.setRoot("Niveles");
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -46,8 +47,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label fx:id="puntos" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="435.0" prefHeight="30.0" prefWidth="70.0" />
-      <Label fx:id="tiempo" alignment="CENTER" layoutX="108.0" layoutY="435.0" prefHeight="30.0" prefWidth="70.0" />
+      <Label fx:id="puntos" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="432.0" prefHeight="30.0" prefWidth="70.0" />
+      <Label fx:id="tiempo" alignment="CENTER" layoutX="164.0" layoutY="432.0" prefHeight="30.0" prefWidth="70.0" />
       <ImageView fx:id="img_vida6" fitHeight="30.0" fitWidth="32.0" layoutX="580.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Imagenes/corazon.png" />
@@ -78,5 +79,6 @@
             <Image url="@../../../Imagenes/corazon.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="26.0" prefWidth="44.0" text="&lt;=" />
    </children>
 </AnchorPane>

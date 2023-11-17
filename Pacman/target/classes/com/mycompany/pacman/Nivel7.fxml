@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="624.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.Nivel7Controller">
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="624.0" style="-fx-background-color: black;" stylesheets="@../../../CSS/EstiloPacman.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.Nivel7Controller">
    <children>
       <GridPane fx:id="gritpane" layoutX="-2.0" prefHeight="422.0" prefWidth="624.0" style="-fx-border-color: white;">
          <columnConstraints>
@@ -44,10 +47,40 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="puntos" contentDisplay="CENTER" layoutX="310.0" layoutY="439.0" prefHeight="17.0" prefWidth="49.0" style="-fx-background-color: white;" />
       <Label layoutX="384.0" layoutY="439.0" style="-fx-background-color: white;" />
       <Label layoutX="455.0" layoutY="439.0" style="-fx-background-color: white;" />
-      <Label fx:id="tiempo" layoutX="373.0" layoutY="440.0" prefHeight="17.0" prefWidth="49.0" style="-fx-background-color: white;" />
-      <Label fx:id="vidas" layoutX="436.0" layoutY="440.0" prefHeight="17.0" prefWidth="49.0" style="-fx-background-color: white;" />
+      <Label fx:id="puntos" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="431.0" prefHeight="30.0" prefWidth="70.0" />
+      <Label fx:id="tiempo" alignment="CENTER" layoutX="176.0" layoutY="431.0" prefHeight="30.0" prefWidth="70.0" />
+      <ImageView fx:id="img_vida6" fitHeight="30.0" fitWidth="32.0" layoutX="592.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_vida5" fitHeight="30.0" fitWidth="32.0" layoutX="556.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_vida4" fitHeight="30.0" fitWidth="32.0" layoutX="520.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_vida3" fitHeight="30.0" fitWidth="32.0" layoutX="482.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_vida2" fitHeight="30.0" fitWidth="32.0" layoutX="444.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_vida1" fitHeight="30.0" fitWidth="32.0" layoutX="406.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagenes/corazon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnBack" layoutX="26.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="26.0" prefWidth="44.0" text="&lt;=" />
    </children>
 </AnchorPane>

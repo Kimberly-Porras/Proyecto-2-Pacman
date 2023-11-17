@@ -11,7 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 //Universidad Nacional, Campus Coto
 //Desarrollado por:
@@ -25,11 +27,19 @@ public class NivelesController implements Initializable {
 
     @FXML
     private ImageView btnRegresar;
+    public static int Vidas = 6;
+    public static int Puntos = 0;
+    @FXML
+    private Label lblPuntos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        lblPuntos.setText(Puntos + "");
     }    
+    
+    
 
     @FXML
     private void bntNIvel1(ActionEvent event) throws IOException {
@@ -79,5 +89,11 @@ public class NivelesController implements Initializable {
     @FXML
     private void bntNIvel10(ActionEvent event) throws IOException {
         App.setRoot("Nivel10");
+    }
+
+     @FXML
+    private void Back(MouseEvent event) throws IOException {
+        
+        App.setRoot("Niveles");
     }
 }
