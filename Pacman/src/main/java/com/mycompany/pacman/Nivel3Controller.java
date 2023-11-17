@@ -122,15 +122,12 @@ public class Nivel3Controller implements Initializable {
             // Añade el personaje a la nueva posición
             gritpane.add(pacmanImageView, columnaNueva, filaNueva);
 
-            patron[pacmanFila][pacmanColumna] = " ";
-
             // Actualiza la posición actual de Pacman en la matriz
             pacmanFila = filaNueva;
             pacmanColumna = columnaNueva;
 
             // Verifica y procesa la fruta en la nueva posición
             verificarYProcesarFruta();
-            patron[filaNueva][columnaNueva] = "P";
         }
     }
 
@@ -323,14 +320,9 @@ public class Nivel3Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(inkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[inkyFila][inkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 inkyFila = filaNueva;
                 inkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "I";
             }
         });
     }
@@ -344,14 +336,9 @@ public class Nivel3Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(blinkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[blinkyFila][blinkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 blinkyFila = filaNueva;
                 blinkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "O";
             }
         });
     }
@@ -365,14 +352,9 @@ public class Nivel3Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(clydeImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[clydeFila][clydeColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 clydeFila = filaNueva;
                 clydeColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "J";
             }
         });
     }
@@ -386,14 +368,9 @@ public class Nivel3Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(pinkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[pinkyFila][pinkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 pinkyFila = filaNueva;
                 pinkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "L";
             }
         });
     }

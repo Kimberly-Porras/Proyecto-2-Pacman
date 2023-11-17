@@ -66,7 +66,8 @@ public class Nivel1Controller implements Initializable {
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAlePinky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleInky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleClyde, 0, 1500, TimeUnit.MILLISECONDS);
-
+            
+            vidas.setText(String.valueOf(vidas1));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -113,16 +114,13 @@ public class Nivel1Controller implements Initializable {
 
             // Añade el personaje a la nueva posición
             gritpane.add(pacmanImageView, columnaNueva, filaNueva);
-
-            patron[pacmanFila][pacmanColumna] = " ";
-
+            
             // Actualiza la posición actual de Pacman en la matriz
             pacmanFila = filaNueva;
             pacmanColumna = columnaNueva;
 
             // Verifica y procesa la fruta en la nueva posición
             verificarYProcesarFruta();
-            patron[filaNueva][columnaNueva] = "P";
             System.out.println("VIDA: " + Vidas(filaNueva, columnaNueva));
         }
     }
@@ -136,8 +134,22 @@ public class Nivel1Controller implements Initializable {
     }
 
     private boolean Vidas(int fila, int columna) {
+        String contenido = patron[fila][columna];
+        
+        for(int i = 0; i < 15; i++){
+            for(int j = 0; j < 15; j++){
+                System.out.print("|" + patron[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+        
+        if (contenido.equals("O") || contenido.equals("L") || contenido.equals("I") || contenido.equals("J")) {
+            quitarVida();
+            return true;
+        }
+
         // Verifica si la nueva posición está dentro de los límites y no es un bloque ('B') ni una casilla de casa fantasma ('V')
-        if (fila >= 0 && fila < patron.length && columna >= 0 && columna < patron[0].length) {
+        /*if (fila >= 0 && fila < patron.length && columna >= 0 && columna < patron[0].length) {
             String contenido = patron[fila][columna];
 
             // Verifica si la casilla no es un bloque ('B') ni una casilla de casa fantasma ('V')
@@ -147,20 +159,15 @@ public class Nivel1Controller implements Initializable {
                     return true;
                 }
             }
-        }
-
+        }*/
         return false;
     }
 
     private void quitarVida() {
-        // Reduces el contador de vidas
         vidas1 -= 10;
 
         // Actualiza el TextField de vidas en la interfaz gráfica
-        // Supongamos que tienes un TextField llamado "vidas" para mostrar las vidas.
         vidas.setText(String.valueOf(vidas1));
-
-        // Puedes agregar más lógica aquí, como reiniciar el nivel si las vidas llegan a cero, etc.
     }
 
     private boolean MovimientoValidoFantasma(int fila, int columna) {
@@ -302,7 +309,7 @@ public class Nivel1Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     private void moverFantasmaInky(int filaNueva, int columnaNueva) {
         Platform.runLater(() -> {
             if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
@@ -312,14 +319,9 @@ public class Nivel1Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(inkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[inkyFila][inkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 inkyFila = filaNueva;
                 inkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "I";
             }
         });
     }
@@ -333,14 +335,9 @@ public class Nivel1Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(blinkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[blinkyFila][blinkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 blinkyFila = filaNueva;
                 blinkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "O";
             }
         });
     }
@@ -354,18 +351,13 @@ public class Nivel1Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(clydeImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[clydeFila][clydeColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 clydeFila = filaNueva;
                 clydeColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "J";
             }
         });
     }
-    
+
     private void moverFantasmaPinky(int filaNueva, int columnaNueva) {
         Platform.runLater(() -> {
             if (MovimientoValidoFantasma(filaNueva, columnaNueva)) {
@@ -375,14 +367,9 @@ public class Nivel1Controller implements Initializable {
                 // Añade el personaje a la nueva posición
                 gritpane.add(pinkyImageView, columnaNueva, filaNueva);
 
-                String posicion = patron[filaNueva][columnaNueva];
-                patron[pinkyFila][pinkyColumna] = posicion;
-
                 // Actualiza la posición actual de Pacman en la matriz
                 pinkyFila = filaNueva;
                 pinkyColumna = columnaNueva;
-
-                patron[filaNueva][columnaNueva] = "L";
             }
         });
     }
