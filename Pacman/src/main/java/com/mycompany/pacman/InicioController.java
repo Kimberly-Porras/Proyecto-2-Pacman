@@ -22,28 +22,28 @@ import javafx.scene.control.TextField;
 //Alberto Torres
 //Kimberly Porras
 //2023
-
 public class InicioController implements Initializable {
 
     @FXML
     private TextField txtNombreJugador;
     @FXML
     private ComboBox<String> cbxModoJuego;
-ObservableList<String> listaTipoNivel = FXCollections.observableArrayList("Fácil", "Medio", "Difícil");
-    /**
-     * Initializes the controller class.
-     */
+    
+    public static int modoJuego = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbxModoJuego.setItems(listaTipoNivel);
-    }    
-
-    @FXML
-    private void OnModoJuego(ActionEvent event) {
+        txtNombreJugador.setFocusTraversable(false);
+        cbxModoJuego.getItems().addAll("Tiempo", "Ninguno");
     }
 
     @FXML
     private void btnIniciarPartida(ActionEvent event) throws IOException {
+        if(cbxModoJuego.getValue().equals("Tiempo")){
+            modoJuego = 1;
+        }else{
+            modoJuego = 0;
+        }
         App.setRoot("Niveles");
     }
 
@@ -53,6 +53,6 @@ ObservableList<String> listaTipoNivel = FXCollections.observableArrayList("Fáci
 
     @FXML
     private void btnSalir(ActionEvent event) {
+        System.exit(0);
     }
-    
 }

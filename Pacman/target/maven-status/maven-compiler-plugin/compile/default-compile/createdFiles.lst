@@ -9,7 +9,7 @@ factories\SupermanFactory.class
 com\mycompany\pacman\Nivel3Controller$1.class
 util\RecursosJoker.class
 factories\OnePieceFactory.class
-com\mycompany\pacman\Nivel1Controller$1.class
+com\mycompany\pacman\Tiempo$1.class
 com\mycompany\pacman\Nivel2Controller$1.class
 util\Comida.class
 com\mycompany\pacman\Nivel3Controller.class
@@ -40,15 +40,15 @@ util\RecursosDeadPool.class
 com\mycompany\pacman\Nivel7Controller$1.class
 util\RecursosVisuales.class
 com\mycompany\pacman\Nivel8Controller$1.class
-com\mycompany\pacman\ConfiguracionController.class
+com\mycompany\pacman\Tiempo.class
 factories\ComidaFactory.class
 factories\SimpsonsFactory.class
+com\mycompany\pacman\Tiempo$2.class
 com\mycompany\pacman\InicioController.class
 factories\DragonBallFactory.class
 factories\Comidas.class
 util\RecursosEnemigos.class
 com\mycompany\pacman\Nivel4Controller.class
-com\mycompany\pacman\Nivel1Controller.class
 com\mycompany\pacman\Nivel10Controller$1.class
 com\mycompany\pacman\Nivel5Controller$1.class
 com\mycompany\pacman\Nivel7Controller.class

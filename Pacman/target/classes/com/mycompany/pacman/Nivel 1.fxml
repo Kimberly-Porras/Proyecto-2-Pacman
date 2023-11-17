@@ -48,7 +48,8 @@
         </rowConstraints>
       </GridPane>
       <Label fx:id="puntos" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="432.0" prefHeight="30.0" prefWidth="70.0" />
-      <Label fx:id="tiempo" alignment="CENTER" layoutX="164.0" layoutY="432.0" prefHeight="30.0" prefWidth="70.0" />
+      <Label fx:id="tiempo" alignment="CENTER" layoutX="164.0" layoutY="432.0" prefHeight="30.0" prefWidth="93.0" visible="false" />
+
       <ImageView fx:id="img_vida6" fitHeight="30.0" fitWidth="32.0" layoutX="580.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Imagenes/corazon.png" />

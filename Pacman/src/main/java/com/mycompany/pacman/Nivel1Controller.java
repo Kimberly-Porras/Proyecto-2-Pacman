@@ -15,12 +15,16 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class Nivel1Controller implements Initializable {
 
@@ -49,7 +53,6 @@ public class Nivel1Controller implements Initializable {
     private int clydeFila;
     private int clydeColumna;
     private ScheduledExecutorService scheduler;
-   
 
     @FXML
     private ImageView img_vida6;
@@ -66,9 +69,14 @@ public class Nivel1Controller implements Initializable {
     @FXML
     private Button btnBack;
 
+    private Tiempo modoTiempo;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            if (InicioController.modoJuego == 1) {
+                tiempo();
+            }
             patron = descom.descomponerNiveles("Nivel1");
             descom.pintarGridPane(gritpane, patron, 1);
 
@@ -82,9 +90,27 @@ public class Nivel1Controller implements Initializable {
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAlePinky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleInky, 0, 3500, TimeUnit.MILLISECONDS);
             scheduler.scheduleAtFixedRate(this::MoverFantasmaAleClyde, 0, 1500, TimeUnit.MILLISECONDS);
+
+            Timeline actualizarTiempo = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+                if (modoTiempo != null) {
+                    tiempo.setText(modoTiempo.obtenerTiempoFormateado());
+                }
+            }));
+            actualizarTiempo.setCycleCount(Animation.INDEFINITE);
+            actualizarTiempo.play();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void tiempo() {
+        tiempo.setVisible(true);
+        tiempo.setText("00:00:00");
+        if (modoTiempo == null) {
+            modoTiempo = new Tiempo();
+        }
+
+        modoTiempo.iniciarTiempo();
     }
 
     private int[] encontrarPosicion(char elemento, String[][] matriz) {
@@ -100,26 +126,31 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void manejarEventoTeclado(KeyEvent event) {
-        if (NivelesController.Vidas != 0) {
-            int filaNueva = pacmanFila;
-            int columnaNueva = pacmanColumna;
+        if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
+            modoTiempo.detenerTiempo();
+            NivelesController.Vidas = 0;
+        } else {
+            if (NivelesController.Vidas != 0) {
+                int filaNueva = pacmanFila;
+                int columnaNueva = pacmanColumna;
 
-            switch (event.getCode()) {
-                case UP:
-                    filaNueva--;
-                    break;
-                case DOWN:
-                    filaNueva++;
-                    break;
-                case LEFT:
-                    columnaNueva--;
-                    break;
-                case RIGHT:
-                    columnaNueva++;
-                    break;
+                switch (event.getCode()) {
+                    case UP:
+                        filaNueva--;
+                        break;
+                    case DOWN:
+                        filaNueva++;
+                        break;
+                    case LEFT:
+                        columnaNueva--;
+                        break;
+                    case RIGHT:
+                        columnaNueva++;
+                        break;
+                }
+
+                moverPersonaje(filaNueva, columnaNueva);
             }
-
-            moverPersonaje(filaNueva, columnaNueva);
         }
     }
 
@@ -151,7 +182,7 @@ public class Nivel1Controller implements Initializable {
     }
 
     private void quitarVida() {
-        NivelesController.Vidas  -= 1;
+        NivelesController.Vidas -= 1;
 
         switch (NivelesController.Vidas) {
             case 5:
@@ -216,114 +247,134 @@ public class Nivel1Controller implements Initializable {
         }
     }
 
-    private void MoverFantasmasAleatorio() { //BLINKY
-        if (NivelesController.Vidas!= 0) {
-            try {
-                Random rand = new Random();
-                int numeroAleatorio = rand.nextInt(4) + 1;
+    private void MoverFantasmasAleatorio() {
+        if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
+            modoTiempo.detenerTiempo();
+            NivelesController.Vidas = 0;
+        } else {
+            if (NivelesController.Vidas != 0) {
+                try {
+                    Random rand = new Random();
+                    int numeroAleatorio = rand.nextInt(4) + 1;
 
-                switch (numeroAleatorio) {
-                    case 1:
-                        moverFantasma(blinkyFila + 3, blinkyColumna);
-                        break;
-                    case 2:
-                        moverFantasma(blinkyFila - 3, blinkyColumna);
-                        break;
-                    case 3:
-                        moverFantasma(blinkyFila, blinkyColumna - 3);
-                        break;
-                    case 4:
-                        moverFantasma(blinkyFila, blinkyColumna + 3);
-                        break;
-                    default:
-                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    switch (numeroAleatorio) {
+                        case 1:
+                            moverFantasma(blinkyFila + 3, blinkyColumna);
+                            break;
+                        case 2:
+                            moverFantasma(blinkyFila - 3, blinkyColumna);
+                            break;
+                        case 3:
+                            moverFantasma(blinkyFila, blinkyColumna - 3);
+                            break;
+                        case 4:
+                            moverFantasma(blinkyFila, blinkyColumna + 3);
+                            break;
+                        default:
+                        // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
 
     private void MoverFantasmaAlePinky() {
-        if (NivelesController.Vidas != 0) {
-            try {
-                Random rand = new Random();
-                int numeroAleatorio = rand.nextInt(4) + 1;
+        if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
+            modoTiempo.detenerTiempo();
+            NivelesController.Vidas = 0;
+        } else {
+            if (NivelesController.Vidas != 0) {
+                try {
+                    Random rand = new Random();
+                    int numeroAleatorio = rand.nextInt(4) + 1;
 
-                switch (numeroAleatorio) {
-                    case 1:
-                        moverFantasmaPinky(pinkyFila + 2, pinkyColumna);
-                        break;
-                    case 2:
-                        moverFantasmaPinky(pinkyFila - 2, pinkyColumna);
-                        break;
-                    case 3:
-                        moverFantasmaPinky(pinkyFila, pinkyColumna - 2);
-                        break;
-                    case 4:
-                        moverFantasmaPinky(pinkyFila, pinkyColumna + 2);
-                        break;
-                    default:
-                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    switch (numeroAleatorio) {
+                        case 1:
+                            moverFantasmaPinky(pinkyFila + 2, pinkyColumna);
+                            break;
+                        case 2:
+                            moverFantasmaPinky(pinkyFila - 2, pinkyColumna);
+                            break;
+                        case 3:
+                            moverFantasmaPinky(pinkyFila, pinkyColumna - 2);
+                            break;
+                        case 4:
+                            moverFantasmaPinky(pinkyFila, pinkyColumna + 2);
+                            break;
+                        default:
+                        // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
 
     private void MoverFantasmaAleInky() {
-        if (NivelesController.Vidas != 0) {
-            try {
-                Random rand = new Random();
-                int numeroAleatorio = rand.nextInt(4) + 1;
+        if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
+            modoTiempo.detenerTiempo();
+            NivelesController.Vidas = 0;
+        } else {
+            if (NivelesController.Vidas != 0) {
+                try {
+                    Random rand = new Random();
+                    int numeroAleatorio = rand.nextInt(4) + 1;
 
-                switch (numeroAleatorio) {
-                    case 1:
-                        moverFantasmaInky(inkyFila + 4, inkyColumna);
-                        break;
-                    case 2:
-                        moverFantasmaInky(inkyFila - 4, inkyColumna);
-                        break;
-                    case 3:
-                        moverFantasmaInky(inkyFila, inkyColumna - 4);
-                        break;
-                    case 4:
-                        moverFantasmaInky(inkyFila, inkyColumna + 4);
-                        break;
-                    default:
-                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    switch (numeroAleatorio) {
+                        case 1:
+                            moverFantasmaInky(inkyFila + 4, inkyColumna);
+                            break;
+                        case 2:
+                            moverFantasmaInky(inkyFila - 4, inkyColumna);
+                            break;
+                        case 3:
+                            moverFantasmaInky(inkyFila, inkyColumna - 4);
+                            break;
+                        case 4:
+                            moverFantasmaInky(inkyFila, inkyColumna + 4);
+                            break;
+                        default:
+                        // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
 
     private void MoverFantasmaAleClyde() {
-        if (NivelesController.Vidas != 0) {
-            try {
-                Random rand = new Random();
-                int numeroAleatorio = rand.nextInt(4) + 1;
+        if (modoTiempo != null && modoTiempo.getTiempoTranscurrido().toSeconds() >= 20) {
+            modoTiempo.detenerTiempo();
+            NivelesController.Vidas = 0;
+        } else {
+            if (NivelesController.Vidas != 0) {
+                try {
+                    Random rand = new Random();
+                    int numeroAleatorio = rand.nextInt(4) + 1;
 
-                switch (numeroAleatorio) {
-                    case 1:
-                        moverFantasmaClyde(clydeFila + 4, clydeColumna);
-                        break;
-                    case 2:
-                        moverFantasmaClyde(clydeFila - 4, clydeColumna);
-                        break;
-                    case 3:
-                        moverFantasmaClyde(clydeFila, clydeColumna - 4);
-                        break;
-                    case 4:
-                        moverFantasmaClyde(clydeFila, clydeColumna + 4);
-                        break;
-                    default:
-                    // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    switch (numeroAleatorio) {
+                        case 1:
+                            moverFantasmaClyde(clydeFila + 4, clydeColumna);
+                            break;
+                        case 2:
+                            moverFantasmaClyde(clydeFila - 4, clydeColumna);
+                            break;
+                        case 3:
+                            moverFantasmaClyde(clydeFila, clydeColumna - 4);
+                            break;
+                        case 4:
+                            moverFantasmaClyde(clydeFila, clydeColumna + 4);
+                            break;
+                        default:
+                        // En caso de un valor no esperado, no haces nada o manejas la situación según tus necesidades
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -482,7 +533,7 @@ public class Nivel1Controller implements Initializable {
 
     @FXML
     private void Back(MouseEvent event) throws IOException {
-        
+
         App.setRoot("Niveles");
     }
 }

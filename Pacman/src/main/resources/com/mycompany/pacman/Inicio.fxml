@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.InicioController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../../../CSS/EstiloPacman.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.pacman.InicioController">
    <children>
       <ImageView fitHeight="495.0" fitWidth="633.0" layoutX="3.0" layoutY="-8.0" opacity="0.25" pickOnBounds="true">
          <image>
@@ -24,8 +24,8 @@
       <ImageView fitHeight="488.0" fitWidth="650.0" layoutX="-7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="TOP_CENTER" layoutX="178.0" layoutY="175.0" prefHeight="290.0" prefWidth="300.0" spacing="20.0">
          <children>
-            <TextField fx:id="txtNombreJugador" prefHeight="26.0" prefWidth="263.0" promptText="Nombre del jugador" />
-            <ComboBox fx:id="cbxModoJuego" onAction="#OnModoJuego" prefHeight="26.0" prefWidth="179.0" promptText="Modo de juego" style="-fx-background-color: white;" />
+            <TextField fx:id="txtNombreJugador" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" promptText="Nombre del jugador" />
+            <ComboBox fx:id="cbxModoJuego" prefHeight="26.0" prefWidth="179.0" promptText="Modo de juego" style="-fx-background-color: white;" />
             <Button mnemonicParsing="false" onAction="#btnIniciarPartida" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: #8fe3ff; -fx-border-color: #0CB7F2;" text="Iniciar partida" textFill="WHITE" />
             <Button mnemonicParsing="false" onAction="#btnConfiguraciones" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: ecab0f;" text="Configuraciones" textFill="WHITE" />
             <Button mnemonicParsing="false" onAction="#btnSalir" prefHeight="38.0" prefWidth="179.0" style="-fx-background-color: #f80000;" text="Salir del juego " textFill="WHITE" />
